@@ -6,6 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { trpc } from "@/lib/trpc";
+import { MOCK_DISCOGRAPHY, MOCK_LIVE_EVENTS } from "@/data/mockData";
 
 interface GameModalProps {
   type: string;
@@ -192,7 +193,8 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
 
-  const { data: discoData = [], isLoading: discoLoading } = trpc.discography.list.useQuery();
+  const discoData = MOCK_DISCOGRAPHY;
+  const discoLoading = false;
 
   // Color palette for releases (cycles through)
   const colorPalette = ["#aa00ff", "#e040fb", "#7c4dff", "#00e5ff", "#ff6d00", "#ff1744", "#00e676"];
@@ -362,7 +364,8 @@ function LiveModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
   useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
 
-  const { data: liveData = [], isLoading: liveLoading } = trpc.liveEvents.list.useQuery();
+  const liveData = MOCK_LIVE_EVENTS;
+  const liveLoading = false;
 
   // Convert DB data to display format
   const today = new Date().toISOString().split('T')[0];

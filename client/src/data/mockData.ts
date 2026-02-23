@@ -1,0 +1,55 @@
+export const MOCK_DISCOGRAPHY = [
+    {
+        id: 1,
+        title: "1st EP",
+        releaseYear: 2024,
+        releaseDate: "2024-05-01",
+        type: "ep",
+        streamingUrl: "https://example.com/streaming",
+        downloadUrl: "https://example.com/download",
+        coverImageUrl: "https://placehold.co/400x400/000000/ff0000?text=1st+EP",
+        description: "Sense of Defeatの1st EP。初期衝動を詰め込んだ全4曲。",
+        isPublished: true,
+        sortOrder: 1,
+    },
+    {
+        id: 2,
+        title: "Toshi Demo",
+        releaseYear: 2023,
+        releaseDate: "2023-10-15",
+        type: "single",
+        streamingUrl: "https://example.com/streaming",
+        downloadUrl: "https://example.com/download",
+        coverImageUrl: "https://placehold.co/400x400/000000/ff0000?text=Toshi+Demo",
+        description: "バンド結成直後にレコーディングされたデモ音源。",
+        isPublished: true,
+        sortOrder: 2,
+    },
+];
+
+export const MOCK_LIVE_EVENTS = [
+    {
+        id: 1,
+        eventDate: "2024-12-31",
+        venueName: "Shinjuku ANTIKNOCK",
+        venueCity: "Tokyo",
+        eventTitle: "COUNTDOWN LIVE 2024",
+        ticketUrl: "https://example.com/ticket",
+        detailUrl: "https://example.com/detail",
+        flyerImageUrl: "https://placehold.co/600x800/000000/ff0000?text=Live+Flyer",
+        isPublished: true,
+        sortOrder: 1,
+    },
+    {
+        id: 2,
+        eventDate: "2025-03-15",
+        venueName: "Shibuya CYCLONE",
+        venueCity: "Tokyo",
+        eventTitle: "METAL MADNESS VOL.1",
+        ticketUrl: "https://example.com/ticket",
+        detailUrl: "https://example.com/detail",
+        flyerImageUrl: "https://placehold.co/600x800/000000/ff0000?text=Live+Flyer+2",
+        isPublished: true,
+        sortOrder: 2,
+    }
+];
