@@ -1,0 +1,55 @@
+{
+  "query": "SELECT id, title, releaseYear, type, streamingUrl, isPublished, sortOrder FROM discography ORDER BY sortOrder;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2nRXUfWgUAL1TXs.1cd14a099e01 --database CT5QoWapZ5ezL8CquDYeAB --execute SELECT id, title, releaseYear, type, streamingUrl, isPublished, sortOrder FROM discography ORDER BY sortOrder;",
+  "rows": [
+    {
+      "id": "1",
+      "title": "Paradigm Down",
+      "releaseYear": "2024",
+      "type": "single",
+      "streamingUrl": "https://linkco.re/CyZG3Dtg",
+      "isPublished": "1",
+      "sortOrder": "0"
+    },
+    {
+      "id": "2",
+      "title": "PATH OF DEATH",
+      "releaseYear": "2022",
+      "type": "album",
+      "streamingUrl": "https://linkco.re/pZ3maE3f",
+      "isPublished": "1",
+      "sortOrder": "1"
+    },
+    {
+      "id": "3",
+      "title": "Tree of philosophia",
+      "releaseYear": "2021",
+      "type": "single",
+      "streamingUrl": "https://linkco.re/cBgFyB3q",
+      "isPublished": "1",
+      "sortOrder": "2"
+    },
+    {
+      "id": "4",
+      "title": "Brightness",
+      "releaseYear": "2020",
+      "type": "single",
+      "streamingUrl": "https://linkco.re/aaGgbv8E",
+      "isPublished": "1",
+      "sortOrder": "3"
+    },
+    {
+      "id": "5",
+      "title": "BOTTLENECK",
+      "releaseYear": "2020",
+      "type": "single",
+      "streamingUrl": "https://linkco.re/xNbKMBXS",
+      "isPublished": "1",
+      "sortOrder": "4"
+    }
+  ],
+  "messages": [],
+  "stdout": "id\ttitle\treleaseYear\ttype\tstreamingUrl\tisPublished\tsortOrder\n1\tParadigm Down\t2024\tsingle\thttps://linkco.re/CyZG3Dtg\t1\t0\n2\tPATH OF DEATH\t2022\talbum\thttps://linkco.re/pZ3maE3f\t1\t1\n3\tTree of philosophia\t2021\tsingle\thttps://linkco.re/cBgFyB3q\t1\t2\n4\tBrightness\t2020\tsingle\thttps://linkco.re/aaGgbv8E\t1\t3\n5\tBOTTLENECK\t2020\tsingle\thttps://linkco.re/xNbKMBXS\t1\t4\n",
+  "stderr": "",
+  "execution_time_ms": 1532
+}

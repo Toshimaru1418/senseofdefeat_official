@@ -1,0 +1,9 @@
+{
+  "query": "\nINSERT INTO discography (title, releaseYear, releaseDate, type, streamingUrl, coverImageUrl, description, isPublished, sortOrder)\nVALUES\n  ('Paradigm Down', 2024, '2024-01-01', 'single', 'https://linkco.re/CyZG3Dtg', NULL, 'SENSE OF DEFEATの最新シングル。', 1, 0),\n  ('PATH OF DEATH', 2022, '2022-01-01', 'album', 'https://linkco.re/pZ3maE3f', NULL, 'SENSE OF DEFEATのフルアルバム。', 1, 1),\n  ('Tree of philosophia', 2021, '2021-01-01', 'single', 'https://linkco.re/cBgFyB3q', NULL, NULL, 1, 2),\n  ('Brightness', 2020, '2020-01-01', 'single', 'https://linkco.re/aaGgbv8E', NULL, NULL, 1, 3),\n  ('BOTTLENECK', 2020, '2020-01-01', 'single', 'https://linkco.re/xNbKMBXS', NULL, NULL, 1, 4);\n",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2nRXUfWgUAL1TXs.1cd14a099e01 --database CT5QoWapZ5ezL8CquDYeAB --execute \nINSERT INTO discography (title, releaseYear, releaseDate, type, streamingUrl, coverImageUrl, description, isPublished, sortOrder)\nVALUES\n  ('Paradigm Down', 2024, '2024-01-01', 'single', 'https://linkco.re/CyZG3Dtg', NULL, 'SENSE OF DEFEATの最新シングル。', 1, 0),\n  ('PATH OF DEATH', 2022, '2022-01-01', 'album', 'https://linkco.re/pZ3maE3f', NULL, 'SENSE OF DEFEATのフルアルバム。', 1, 1),\n  ('Tree of philosophia', 2021, '2021-01-01', 'single', 'https://linkco.re/cBgFyB3q', NULL, NULL, 1, 2),\n  ('Brightness', 2020, '2020-01-01', 'single', 'https://linkco.re/aaGgbv8E', NULL, NULL, 1, 3),\n  ('BOTTLENECK', 2020, '2020-01-01', 'single', 'https://linkco.re/xNbKMBXS', NULL, NULL, 1, 4);\n",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 1620
+}

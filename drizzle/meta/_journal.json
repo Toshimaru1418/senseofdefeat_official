@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1771556240397,
+      "tag": "0000_romantic_radioactive_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1771556330425,
+      "tag": "0001_curved_dazzler",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1771568045045,
+      "tag": "0002_first_zeigeist",
+      "breakpoints": true
+    }
+  ]
+}
