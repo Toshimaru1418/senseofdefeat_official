@@ -286,9 +286,16 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
 
             {/* SNS Links */}
             <div className="flex gap-3 justify-center mb-6">
-              {["X (Twitter)", "Instagram", "YouTube"].map(sns => (
-                <button
-                  key={sns}
+              {[
+                { name: "X (Twitter)", url: "https://x.com/sod_official_tw" },
+                { name: "Instagram", url: "https://www.instagram.com/senseofdefeat/" },
+                { name: "YouTube", url: "https://www.youtube.com/@senseofdefeat4937" },
+              ].map(sns => (
+                <a
+                  key={sns.name}
+                  href={sns.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="px-3 py-2"
                   style={{
                     fontFamily: "'Press Start 2P', monospace",
@@ -297,21 +304,22 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
                     border: "2px solid #00e5ff",
                     background: "transparent",
                     cursor: "pointer",
+                    textDecoration: "none",
                     transition: "all 0.1s",
                   }}
                   onMouseEnter={e => {
-                    (e.target as HTMLButtonElement).style.background =
+                    (e.currentTarget as HTMLAnchorElement).style.background =
                       "#00e5ff";
-                    (e.target as HTMLButtonElement).style.color = "#000";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#000";
                   }}
                   onMouseLeave={e => {
-                    (e.target as HTMLButtonElement).style.background =
+                    (e.currentTarget as HTMLAnchorElement).style.background =
                       "transparent";
-                    (e.target as HTMLButtonElement).style.color = "#00e5ff";
+                    (e.currentTarget as HTMLAnchorElement).style.color = "#00e5ff";
                   }}
                 >
-                  {sns}
-                </button>
+                  {sns.name}
+                </a>
               ))}
             </div>
 
@@ -581,15 +589,16 @@ function LiveModal({ onClose }: { onClose: () => void }) {
   // Convert DB data to display format
   const today = new Date().toISOString().split("T")[0];
   const lives = liveData.map(event => {
-    const isUpcoming = event.eventDate >= today;
+    const ev = event as any;
+    const isUpcoming = ev.eventDate >= today;
     return {
-      date: event.eventDate.replace(/-/g, "."),
-      venue: event.venueName + (event.venueCity ? ` (${event.venueCity})` : ""),
-      name: event.eventTitle ?? event.venueName,
+      date: ev.eventDate.replace(/-/g, "."),
+      venue: ev.venueName + (ev.venueCity ? ` (${ev.venueCity})` : ""),
+      name: ev.eventTitle ?? ev.venueName,
       status: isUpcoming ? "UPCOMING" : "ENDED",
       color: isUpcoming ? "#ff6d00" : "#555555",
-      ticketUrl: event.ticketUrl,
-      flyerImageUrl: (event as any).flyerImageUrl as string | null | undefined,
+      ticketUrl: ev.ticketUrl,
+      flyerImageUrl: ev.flyerImageUrl as string | null | undefined,
     };
   });
 
@@ -890,14 +899,8 @@ function ContactModal({ onClose }: { onClose: () => void }) {
             <div className="space-y-4 mb-6">
               {[
                 {
-                  label: "BOOKING",
-                  value: "booking@senseofdefeat.jp",
-                  icon: "♦",
-                },
-                { label: "PRESS", value: "press@senseofdefeat.jp", icon: "♦" },
-                {
-                  label: "FAN MAIL",
-                  value: "fanmail@senseofdefeat.jp",
+                  label: "CONTACT",
+                  value: "senseofdefeat@gmail.com",
                   icon: "♦",
                 },
               ].map(item => (
@@ -941,6 +944,18 @@ function ContactModal({ onClose }: { onClose: () => void }) {
                   </div>
                 </div>
               ))}
+
+              <div
+                className="p-3 text-center"
+                style={{
+                  fontFamily: "'Noto Sans JP', sans-serif",
+                  fontSize: "12px",
+                  color: "#e0e0e0",
+                  lineHeight: "1.6",
+                }}
+              >
+                ※各種SNSのDMでも連絡を受け付けています。
+              </div>
             </div>
 
             <div
