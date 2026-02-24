@@ -199,26 +199,15 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
   // Color palette for releases (cycles through)
   const colorPalette = ["#aa00ff", "#e040fb", "#7c4dff", "#00e5ff", "#ff6d00", "#ff1744", "#00e676"];
 
-  // Convert DB data to display format, fallback to static data if DB is empty
-  const staticReleases = [
-    { title: "Paradigm Down", type: "SINGLE", year: "2024", color: "#aa00ff", link: "https://linkco.re/CyZG3Dtg" },
-    { title: "PATH OF DEATH", type: "ALBUM", year: "2022", color: "#e040fb", link: "https://linkco.re/pZ3maE3f" },
-    { title: "Tree of philosophia", type: "SINGLE", year: "2021", color: "#7c4dff", link: "https://linkco.re/cBgFyB3q" },
-    { title: "Brightness", type: "SINGLE", year: "2020", color: "#00e5ff", link: "https://linkco.re/aaGgbv8E" },
-    { title: "BOTTLENECK", type: "SINGLE", year: "2020", color: "#ff6d00", link: "https://linkco.re/xNbKMBXS" },
-  ];
-
-  const releases = discoData.length > 0
-    ? discoData.map((item, i) => ({
-      title: item.title,
-      type: item.type.replace('_', ' ').toUpperCase(),
-      year: String(item.releaseYear),
-      color: colorPalette[i % colorPalette.length],
-      link: item.streamingUrl ?? item.downloadUrl ?? "",
-      description: item.description,
-      coverImageUrl: item.coverImageUrl,
-    }))
-    : staticReleases;
+  const releases = discoData.map((item, i) => ({
+    title: item.title,
+    type: item.type.replace('_', ' ').toUpperCase(),
+    year: String(item.releaseYear),
+    color: colorPalette[i % colorPalette.length],
+    link: item.streamingUrl ?? item.downloadUrl ?? "",
+    description: item.description,
+    coverImageUrl: item.coverImageUrl,
+  }));
 
   return (
     <div
@@ -294,23 +283,40 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
                         {r.title}
                       </div>
                     </div>
-                    {/* Album art placeholder */}
-                    <div
-                      style={{
-                        width: 56,
-                        height: 56,
-                        background: `linear-gradient(135deg, ${r.color}44, ${r.color}22)`,
-                        border: `2px solid ${r.color}`,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <div style={{ width: 20, height: 20, borderRadius: "50%", border: `3px solid ${r.color}`, position: "relative" }}>
-                        <div style={{ width: 6, height: 6, borderRadius: "50%", background: r.color, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} />
+                    {r.coverImageUrl ? (
+                      <div
+                        style={{
+                          width: 56,
+                          height: 56,
+                          border: `2px solid ${r.color}`,
+                          flexShrink: 0,
+                          overflow: "hidden",
+                        }}
+                      >
+                        <img
+                          src={r.coverImageUrl}
+                          alt={r.title}
+                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                        />
                       </div>
-                    </div>
+                    ) : (
+                      <div
+                        style={{
+                          width: 56,
+                          height: 56,
+                          background: `linear-gradient(135deg, ${r.color}44, ${r.color}22)`,
+                          border: `2px solid ${r.color}`,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <div style={{ width: 20, height: 20, borderRadius: "50%", border: `3px solid ${r.color}`, position: "relative" }}>
+                          <div style={{ width: 6, height: 6, borderRadius: "50%", background: r.color, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} />
+                        </div>
+                      </div>
+                    )}
                   </div>
                   {'description' in r && typeof (r as { description?: string | null }).description === 'string' && (
                     <div style={{
