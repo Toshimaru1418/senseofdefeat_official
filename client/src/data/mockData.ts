@@ -75,37 +75,20 @@ export const MOCK_DISCOGRAPHY = [
 
 export const MOCK_LIVE_EVENTS = [
   {
+    id: 4,
+    eventDate: "2026-05-16",
+    venueName: "東高円寺 二万電圧",
+    eventTitle: "SPLATTERCAGE",
+    isPublished: true,
+    sortOrder: 0,
+  },
+  {
     id: 3,
     eventDate: "2026-03-12",
     venueName: "Shinjuku ANTIKNOCK",
     eventTitle: "SHEER HEART ATTACK vol.19",
     flyerImageUrl: "/flyer_20260312.jpg",
     isPublished: true,
-    sortOrder: 0,
-  },
-  {
-    id: 1,
-    eventDate: "2024-12-31",
-    venueName: "Shinjuku ANTIKNOCK",
-    venueCity: "Tokyo",
-    eventTitle: "COUNTDOWN LIVE 2024",
-    ticketUrl: "https://example.com/ticket",
-    detailUrl: "https://example.com/detail",
-    flyerImageUrl: "https://placehold.co/600x800/000000/ff0000?text=Live+Flyer",
-    isPublished: true,
     sortOrder: 1,
-  },
-  {
-    id: 2,
-    eventDate: "2025-03-15",
-    venueName: "Shibuya CYCLONE",
-    venueCity: "Tokyo",
-    eventTitle: "METAL MADNESS VOL.1",
-    ticketUrl: "https://example.com/ticket",
-    detailUrl: "https://example.com/detail",
-    flyerImageUrl:
-      "https://placehold.co/600x800/000000/ff0000?text=Live+Flyer+2",
-    isPublished: true,
-    sortOrder: 2,
   },
 ];
