@@ -79,6 +79,7 @@ export const MOCK_LIVE_EVENTS = [
     eventDate: "2026-05-16",
     venueName: "東高円寺 二万電圧",
     eventTitle: "SPLATTERCAGE",
+    details: "w/ Bounce out innocence, CHAOS KILLER, ILIAS, IN FOR THE KILL, PAIN IN THA NECK, Vihta\n\nopen/start 16:00/16:30\nadv/door 2,900/3,400(+1drink)",
     isPublished: true,
     sortOrder: 0,
   },
