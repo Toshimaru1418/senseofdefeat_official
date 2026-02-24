@@ -11,16 +11,23 @@ interface GameHUDProps {
   stageLabel?: string;
 }
 
-export function GameHUD({ hp, maxHp, score, stageLabel = "STAGE 1" }: GameHUDProps) {
+export function GameHUD({
+  hp,
+  maxHp,
+  score,
+  stageLabel = "STAGE 1",
+}: GameHUDProps) {
   const hpPercent = hp / maxHp;
-  const hpColor = hpPercent > 0.5 ? "#00e676" : hpPercent > 0.25 ? "#ffdd00" : "#ff1744";
+  const hpColor =
+    hpPercent > 0.5 ? "#00e676" : hpPercent > 0.25 ? "#ffdd00" : "#ff1744";
 
   return (
     <div
       className="absolute top-0 left-0 right-0 pointer-events-none"
       style={{
         padding: "8px 12px",
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)",
+        background:
+          "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)",
         zIndex: 10,
       }}
     >
@@ -134,7 +141,8 @@ export function ControlsGuide() {
       className="absolute bottom-0 left-0 right-0 pointer-events-none"
       style={{
         padding: "6px 12px",
-        background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)",
+        background:
+          "linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)",
         zIndex: 10,
       }}
     >
@@ -143,7 +151,7 @@ export function ControlsGuide() {
           { key: "← →", label: "MOVE" },
           { key: "↑ / SPACE", label: "JUMP" },
           { key: "Z", label: "SHOOT" },
-        ].map((ctrl) => (
+        ].map(ctrl => (
           <div key={ctrl.key} className="flex items-center gap-2">
             <span
               style={{
@@ -173,20 +181,32 @@ export function ControlsGuide() {
   );
 }
 
-export function MobileControls({ onLeft, onRight, onJump, onShoot, onLeftEnd, onRightEnd }: {
+export function MobileControls({
+  onLeft,
+  onRight,
+  onJump,
+  onShoot,
+  onLeftEnd,
+  onRightEnd,
+  onJumpEnd,
+  onShootEnd,
+}: {
   onLeft: () => void;
   onRight: () => void;
   onJump: () => void;
   onShoot: () => void;
   onLeftEnd: () => void;
   onRightEnd: () => void;
+  onJumpEnd: () => void;
+  onShootEnd: () => void;
 }) {
   return (
     <div
       className="absolute bottom-0 left-0 right-0 pointer-events-auto"
       style={{
         padding: "12px 16px 36px 16px",
-        background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)",
+        background:
+          "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)",
         zIndex: 20,
         display: "flex",
         justifyContent: "space-between",
@@ -241,7 +261,9 @@ export function MobileControls({ onLeft, onRight, onJump, onShoot, onLeftEnd, on
       <div className="flex gap-3">
         <button
           onTouchStart={onShoot}
+          onTouchEnd={onShootEnd}
           onMouseDown={onShoot}
+          onMouseUp={onShootEnd}
           style={{
             width: 52,
             height: 52,
@@ -255,11 +277,13 @@ export function MobileControls({ onLeft, onRight, onJump, onShoot, onLeftEnd, on
             WebkitUserSelect: "none",
           }}
         >
-          SHOT
+          SHOOT
         </button>
         <button
           onTouchStart={onJump}
+          onTouchEnd={onJumpEnd}
           onMouseDown={onJump}
+          onMouseUp={onJumpEnd}
           style={{
             width: 52,
             height: 52,

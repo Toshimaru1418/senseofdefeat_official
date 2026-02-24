@@ -268,7 +268,7 @@ export default function Home() {
   return (
     <div
       style={{
-        height: "100vh",
+        height: "100dvh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -330,7 +330,7 @@ export default function Home() {
         style={{
           position: "relative",
           width: "100%",
-          maxWidth: "min(100%, calc((100vh - 52px) * 16 / 9))",
+          maxWidth: "min(100%, calc((100dvh - 52px) * 16 / 9))",
           aspectRatio: `${CANVAS_WIDTH} / ${CANVAS_HEIGHT}`,
           overflow: "hidden",
           boxShadow:
@@ -377,6 +377,8 @@ export default function Home() {
             onShoot={() => pressKey("KeyZ")}
             onLeftEnd={() => releaseKey("ArrowLeft")}
             onRightEnd={() => releaseKey("ArrowRight")}
+            onJumpEnd={() => releaseKey("Space")}
+            onShootEnd={() => releaseKey("KeyZ")}
           />
         )}
 
