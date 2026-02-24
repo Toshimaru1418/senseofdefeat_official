@@ -599,6 +599,7 @@ function LiveModal({ onClose }: { onClose: () => void }) {
       color: isUpcoming ? "#ff6d00" : "#555555",
       ticketUrl: ev.ticketUrl,
       flyerImageUrl: ev.flyerImageUrl as string | null | undefined,
+      details: ev.details as string | undefined,
     };
   });
 
@@ -775,6 +776,23 @@ function LiveModal({ onClose }: { onClose: () => void }) {
                       >
                         {live.venue}
                       </div>
+
+                      {live.details && (
+                        <div
+                          style={{
+                            marginTop: "12px",
+                            fontFamily: "'Noto Sans JP', sans-serif",
+                            fontSize: "11px",
+                            color: "#dddddd",
+                            lineHeight: "1.6",
+                            whiteSpace: "pre-wrap",
+                            borderTop: `1px solid ${live.color}33`,
+                            paddingTop: "8px",
+                          }}
+                        >
+                          {live.details}
+                        </div>
+                      )}
                     </div>
                     {live.status === "UPCOMING" && live.ticketUrl && (
                       <a
