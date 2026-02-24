@@ -14,12 +14,22 @@ import { GameModal } from "@/components/GameModal";
 import { TitleScreen } from "@/components/TitleScreen";
 import { CharSelectScreen } from "@/components/CharSelectScreen";
 
-const BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-1_1771547719000_na1fn_YmctY2l0eS1kdXNr.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTFfMTc3MTU0NzcxOTAwMF9uYTFmbl9ZbWN0WTJsMGVTMWtkWE5yLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=VPRrtSejcJXwIWI~fJr90Y07uq8z6MLLEEmcICeKf~~R36VeWDUZwSelsHMdc4TysR3t1~4dAW6VeAu9hbKQtS4GLzxTT7-xjTNTGmCFEttHWK0r0QKqpl8BVGc0EOwSb9f2BiZCEMBt9yqBBReI9S1~Hwb3cXAHNx0mPnG-rzh2~dVwaUD4MdPMBrEjvPBIql73HBWXUBkRP6v58KLnca7V9ISp98czxsr2fNFppCstOQZqUxsPqLlt37Np3K6GdEw56VO8vWQb~nUtYBFJ19ocrH15g~FwltOVrtV~oqu0bnkINKiL~17DsIefklvA31SG2gd9xmc1db0jtyN0Gw__";
+const BG_URL =
+  "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-1_1771547719000_na1fn_YmctY2l0eS1kdXNr.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTFfMTc3MTU0NzcxOTAwMF9uYTFmbl9ZbWN0WTJsMGVTMWtkWE5yLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=VPRrtSejcJXwIWI~fJr90Y07uq8z6MLLEEmcICeKf~~R36VeWDUZwSelsHMdc4TysR3t1~4dAW6VeAu9hbKQtS4GLzxTT7-xjTNTGmCFEttHWK0r0QKqpl8BVGc0EOwSb9f2BiZCEMBt9yqBBReI9S1~Hwb3cXAHNx0mPnG-rzh2~dVwaUD4MdPMBrEjvPBIql73HBWXUBkRP6v58KLnca7V9ISp98czxsr2fNFppCstOQZqUxsPqLlt37Np3K6GdEw56VO8vWQb~nUtYBFJ19ocrH15g~FwltOVrtV~oqu0bnkINKiL~17DsIefklvA31SG2gd9xmc1db0jtyN0Gw__";
 
-const BGM_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/95086222/zOXpmUuVBfGMvdze.mp3";
+const BGM_URL =
+  "https://files.manuscdn.com/user_upload_by_module/session_file/95086222/zOXpmUuVBfGMvdze.mp3";
 
 // Minimap component
-function Minimap({ cameraX, playerX, worldWidth }: { cameraX: number; playerX: number; worldWidth: number }) {
+function Minimap({
+  cameraX,
+  playerX,
+  worldWidth,
+}: {
+  cameraX: number;
+  playerX: number;
+  worldWidth: number;
+}) {
   const MINIMAP_W = 200;
   const MINIMAP_H = 12;
   const sections = [
@@ -68,7 +78,7 @@ function Minimap({ cameraX, playerX, worldWidth }: { cameraX: number; playerX: n
         }}
       >
         {/* Section colors */}
-        {sections.map((s) => (
+        {sections.map(s => (
           <div
             key={s.start}
             style={{
@@ -83,7 +93,7 @@ function Minimap({ cameraX, playerX, worldWidth }: { cameraX: number; playerX: n
           />
         ))}
         {/* Gimmick markers */}
-        {gimmicks.map((g) => (
+        {gimmicks.map(g => (
           <div
             key={g.x}
             style={{
@@ -132,6 +142,7 @@ export default function Home() {
   const bgImageRef = useRef<HTMLImageElement | null>(null);
   const bgmRef = useRef<HTMLAudioElement | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isPortrait, setIsPortrait] = useState(false);
   const [bgmEnabled, setBgmEnabled] = useState(true);
 
   // Initialize BGM audio element
@@ -169,12 +180,17 @@ export default function Home() {
   useEffect(() => {
     const img = new Image();
     img.src = BG_URL;
-    img.onload = () => { bgImageRef.current = img; };
+    img.onload = () => {
+      bgImageRef.current = img;
+    };
   }, []);
 
-  // Detect mobile
+  // Detect mobile and orientation
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
+    const check = () => {
+      setIsMobile(window.innerWidth < 768);
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
@@ -183,7 +199,9 @@ export default function Home() {
   // Mobile controls: inject keyboard events
   // repeat: false ensures justPressed is registered correctly (same as physical key first press)
   const pressKey = useCallback((code: string) => {
-    window.dispatchEvent(new KeyboardEvent("keydown", { code, bubbles: true, repeat: false }));
+    window.dispatchEvent(
+      new KeyboardEvent("keydown", { code, bubbles: true, repeat: false })
+    );
   }, []);
   const releaseKey = useCallback((code: string) => {
     window.dispatchEvent(new KeyboardEvent("keyup", { code, bubbles: true }));
@@ -202,16 +220,19 @@ export default function Home() {
     }, 50);
   }, [startCharSelect, bgmEnabled]);
 
-  const handleSelectCharacter = useCallback((charId: "toshi" | "yuichi" | "ramirez" | "yuj" | "mirko") => {
-    selectCharacter(charId);
-    setTimeout(() => {
-      canvasRef.current?.focus();
-    }, 50);
-  }, [selectCharacter]);
+  const handleSelectCharacter = useCallback(
+    (charId: "toshi" | "yuichi" | "ramirez" | "yuj" | "mirko") => {
+      selectCharacter(charId);
+      setTimeout(() => {
+        canvasRef.current?.focus();
+      }, 50);
+    },
+    [selectCharacter]
+  );
 
   // Toggle BGM on/off
   const toggleBgm = useCallback(() => {
-    setBgmEnabled((prev) => {
+    setBgmEnabled(prev => {
       const next = !prev;
       if (bgmRef.current) {
         if (next) {
@@ -258,6 +279,52 @@ export default function Home() {
         padding: "8px",
       }}
     >
+      {/* Portrait mode warning for mobile */}
+      {isMobile && isPortrait && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "#050010",
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#fff",
+            padding: "24px",
+            textAlign: "center",
+            fontFamily: "'Press Start 2P', monospace",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "clamp(12px, 4vw, 24px)",
+              color: "#00e5ff",
+              marginBottom: "32px",
+              lineHeight: 1.5,
+            }}
+          >
+            SENSE OF DEFEAT
+          </div>
+          <div
+            style={{
+              fontSize: "clamp(8px, 2.5vw, 14px)",
+              lineHeight: 2,
+              color: "#aaa",
+            }}
+          >
+            このゲームは<span style={{ color: "#fff" }}>横画面プレイ</span>を想定しています。
+            <br />
+            <br />
+            スマートフォンの画面を横向きに<br />持ち替えてお楽しみください。
+            <br />
+            <br />
+            <div style={{ fontSize: "32px", marginTop: "16px" }}>📱 🔄</div>
+          </div>
+        </div>
+      )}
+
       {/* Game container - fits viewport without scrolling */}
       <div
         style={{
@@ -266,7 +333,8 @@ export default function Home() {
           maxWidth: "min(100%, calc((100vh - 52px) * 16 / 9))",
           aspectRatio: `${CANVAS_WIDTH} / ${CANVAS_HEIGHT}`,
           overflow: "hidden",
-          boxShadow: "0 0 40px #00e5ff18, 0 0 80px #aa00ff0c, 0 4px 32px rgba(0,0,0,0.8)",
+          boxShadow:
+            "0 0 40px #00e5ff18, 0 0 80px #aa00ff0c, 0 4px 32px rgba(0,0,0,0.8)",
           border: "2px solid #00e5ff18",
           flexShrink: 0,
         }}
@@ -289,7 +357,12 @@ export default function Home() {
         {/* HUD overlay */}
         {gamePhase === "playing" && !isGameOver && (
           <>
-            <GameHUD hp={playerHp} maxHp={maxHp} score={score} stageLabel={stageLabel} />
+            <GameHUD
+              hp={playerHp}
+              maxHp={maxHp}
+              score={score}
+              stageLabel={stageLabel}
+            />
             {!isMobile && <ControlsGuide />}
             <Minimap cameraX={cameraX} playerX={playerX} worldWidth={5000} />
           </>
@@ -308,9 +381,7 @@ export default function Home() {
         )}
 
         {/* Title screen */}
-        {gamePhase === "title" && (
-          <TitleScreen onStart={handleStartTitle} />
-        )}
+        {gamePhase === "title" && <TitleScreen onStart={handleStartTitle} />}
 
         {/* Character Select screen */}
         {gamePhase === "charSelect" && (
@@ -395,12 +466,13 @@ export default function Home() {
                 animation: "blinkAnim 0.8s step-end infinite",
                 boxShadow: "0 0 20px #ffffff44",
               }}
-              onMouseEnter={(e) => {
+              onMouseEnter={e => {
                 (e.target as HTMLButtonElement).style.background = "#ffffff";
                 (e.target as HTMLButtonElement).style.color = "#000";
               }}
-              onMouseLeave={(e) => {
-                (e.target as HTMLButtonElement).style.background = "transparent";
+              onMouseLeave={e => {
+                (e.target as HTMLButtonElement).style.background =
+                  "transparent";
                 (e.target as HTMLButtonElement).style.color = "#ffffff";
               }}
             >
@@ -428,7 +500,7 @@ export default function Home() {
           { label: "DISCOGRAPHY", color: "#aa00ff", type: "discography" },
           { label: "LIVE", color: "#ff6d00", type: "live" },
           { label: "CONTACT", color: "#00e676", type: "info" },
-        ].map((item) => (
+        ].map(item => (
           <button
             key={item.label}
             onClick={() => openModal(item.type)}
@@ -443,15 +515,19 @@ export default function Home() {
               transition: "all 0.15s",
               letterSpacing: "1px",
             }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLButtonElement).style.background = `${item.color}30`;
-              (e.target as HTMLButtonElement).style.boxShadow = `0 0 12px ${item.color}55`;
+            onMouseEnter={e => {
+              (e.target as HTMLButtonElement).style.background =
+                `${item.color}30`;
+              (e.target as HTMLButtonElement).style.boxShadow =
+                `0 0 12px ${item.color}55`;
               (e.target as HTMLButtonElement).style.borderColor = item.color;
             }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLButtonElement).style.background = `${item.color}10`;
+            onMouseLeave={e => {
+              (e.target as HTMLButtonElement).style.background =
+                `${item.color}10`;
               (e.target as HTMLButtonElement).style.boxShadow = "none";
-              (e.target as HTMLButtonElement).style.borderColor = `${item.color}55`;
+              (e.target as HTMLButtonElement).style.borderColor =
+                `${item.color}55`;
             }}
           >
             {item.label}
