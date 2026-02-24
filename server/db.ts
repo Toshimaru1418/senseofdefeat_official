@@ -1,7 +1,15 @@
 import { asc, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertDiscography, InsertLiveEvent, discography, liveEvents, adminSettings, InsertUser, users } from "../drizzle/schema";
-import { ENV } from './_core/env';
+import {
+  InsertDiscography,
+  InsertLiveEvent,
+  discography,
+  liveEvents,
+  adminSettings,
+  InsertUser,
+  users,
+} from "../drizzle/schema";
+import { ENV } from "./_core/env";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -56,8 +64,8 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       values.role = user.role;
       updateSet.role = user.role;
     } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
+      values.role = "admin";
+      updateSet.role = "admin";
     }
 
     if (!values.lastSignedIn) {
@@ -84,7 +92,11 @@ export async function getUserByOpenId(openId: string) {
     return undefined;
   }
 
-  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+  const result = await db
+    .select()
+    .from(users)
+    .where(eq(users.openId, openId))
+    .limit(1);
 
   return result.length > 0 ? result[0] : undefined;
 }
@@ -96,15 +108,26 @@ export async function getLiveEvents(publishedOnly = true) {
   if (!db) return [];
   const query = db.select().from(liveEvents);
   if (publishedOnly) {
-    return await db.select().from(liveEvents).where(eq(liveEvents.isPublished, true)).orderBy(asc(liveEvents.eventDate), asc(liveEvents.sortOrder));
+    return await db
+      .select()
+      .from(liveEvents)
+      .where(eq(liveEvents.isPublished, true))
+      .orderBy(asc(liveEvents.eventDate), asc(liveEvents.sortOrder));
   }
-  return await db.select().from(liveEvents).orderBy(asc(liveEvents.eventDate), asc(liveEvents.sortOrder));
+  return await db
+    .select()
+    .from(liveEvents)
+    .orderBy(asc(liveEvents.eventDate), asc(liveEvents.sortOrder));
 }
 
 export async function getLiveEventById(id: number) {
   const db = await getDb();
   if (!db) return undefined;
-  const result = await db.select().from(liveEvents).where(eq(liveEvents.id, id)).limit(1);
+  const result = await db
+    .select()
+    .from(liveEvents)
+    .where(eq(liveEvents.id, id))
+    .limit(1);
   return result[0];
 }
 
@@ -114,7 +137,10 @@ export async function createLiveEvent(data: InsertLiveEvent) {
   await db.insert(liveEvents).values(data);
 }
 
-export async function updateLiveEvent(id: number, data: Partial<InsertLiveEvent>) {
+export async function updateLiveEvent(
+  id: number,
+  data: Partial<InsertLiveEvent>
+) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.update(liveEvents).set(data).where(eq(liveEvents.id, id));
@@ -132,15 +158,26 @@ export async function getDiscography(publishedOnly = true) {
   const db = await getDb();
   if (!db) return [];
   if (publishedOnly) {
-    return await db.select().from(discography).where(eq(discography.isPublished, true)).orderBy(desc(discography.releaseYear), asc(discography.sortOrder));
+    return await db
+      .select()
+      .from(discography)
+      .where(eq(discography.isPublished, true))
+      .orderBy(desc(discography.releaseYear), asc(discography.sortOrder));
   }
-  return await db.select().from(discography).orderBy(desc(discography.releaseYear), asc(discography.sortOrder));
+  return await db
+    .select()
+    .from(discography)
+    .orderBy(desc(discography.releaseYear), asc(discography.sortOrder));
 }
 
 export async function getDiscographyById(id: number) {
   const db = await getDb();
   if (!db) return undefined;
-  const result = await db.select().from(discography).where(eq(discography.id, id)).limit(1);
+  const result = await db
+    .select()
+    .from(discography)
+    .where(eq(discography.id, id))
+    .limit(1);
   return result[0];
 }
 
@@ -150,7 +187,10 @@ export async function createDiscography(data: InsertDiscography) {
   await db.insert(discography).values(data);
 }
 
-export async function updateDiscography(id: number, data: Partial<InsertDiscography>) {
+export async function updateDiscography(
+  id: number,
+  data: Partial<InsertDiscography>
+) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   await db.update(discography).set(data).where(eq(discography.id, id));
@@ -167,13 +207,19 @@ export async function deleteDiscography(id: number) {
 export async function getAdminSetting(key: string) {
   const db = await getDb();
   if (!db) return null;
-  const result = await db.select().from(adminSettings).where(eq(adminSettings.settingKey, key)).limit(1);
+  const result = await db
+    .select()
+    .from(adminSettings)
+    .where(eq(adminSettings.settingKey, key))
+    .limit(1);
   return result[0]?.settingValue ?? null;
 }
 
 export async function setAdminSetting(key: string, value: string) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
-  await db.insert(adminSettings).values({ settingKey: key, settingValue: value })
+  await db
+    .insert(adminSettings)
+    .values({ settingKey: key, settingValue: value })
     .onDuplicateKeyUpdate({ set: { settingValue: value } });
 }

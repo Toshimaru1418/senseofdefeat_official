@@ -86,17 +86,18 @@ const styles = {
     display: "flex",
     gap: "8px",
   } as React.CSSProperties,
-  navBtn: (active: boolean) => ({
-    fontFamily: pixelFont,
-    fontSize: "7px",
-    color: active ? colors.bg : colors.accent,
-    background: active ? colors.accent : colors.buttonBg,
-    border: `1px solid ${active ? colors.accent : colors.border}`,
-    padding: "6px 12px",
-    cursor: "pointer",
-    transition: "all 0.15s",
-    letterSpacing: "1px",
-  } as React.CSSProperties),
+  navBtn: (active: boolean) =>
+    ({
+      fontFamily: pixelFont,
+      fontSize: "7px",
+      color: active ? colors.bg : colors.accent,
+      background: active ? colors.accent : colors.buttonBg,
+      border: `1px solid ${active ? colors.accent : colors.border}`,
+      padding: "6px 12px",
+      cursor: "pointer",
+      transition: "all 0.15s",
+      letterSpacing: "1px",
+    }) as React.CSSProperties,
   content: {
     padding: "24px",
     maxWidth: "1200px",
@@ -138,9 +139,21 @@ const styles = {
   } as React.CSSProperties,
   btn: (variant: "primary" | "danger" | "success" | "secondary") => {
     const variantColors = {
-      primary: { bg: colors.buttonBg, border: colors.accent, text: colors.accent },
-      danger: { bg: "#ff174422", border: colors.accentRed, text: colors.accentRed },
-      success: { bg: "#00e67622", border: colors.accentGreen, text: colors.accentGreen },
+      primary: {
+        bg: colors.buttonBg,
+        border: colors.accent,
+        text: colors.accent,
+      },
+      danger: {
+        bg: "#ff174422",
+        border: colors.accentRed,
+        text: colors.accentRed,
+      },
+      success: {
+        bg: "#00e67622",
+        border: colors.accentGreen,
+        text: colors.accentGreen,
+      },
       secondary: { bg: "#ffffff11", border: "#ffffff33", text: "#ffffff88" },
     };
     const c = variantColors[variant];
@@ -208,33 +221,39 @@ function PasswordLogin({ onSuccess }: { onSuccess: () => void }) {
   };
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: colors.bg,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: colors.bg,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <div style={{ width: "360px" }}>
-        <div style={{
-          fontFamily: pixelFont,
-          fontSize: "10px",
-          color: colors.accent,
-          textAlign: "center",
-          marginBottom: "8px",
-          textShadow: `0 0 10px ${colors.accent}`,
-          letterSpacing: "2px",
-        }}>
+        <div
+          style={{
+            fontFamily: pixelFont,
+            fontSize: "10px",
+            color: colors.accent,
+            textAlign: "center",
+            marginBottom: "8px",
+            textShadow: `0 0 10px ${colors.accent}`,
+            letterSpacing: "2px",
+          }}
+        >
           ADMIN PANEL
         </div>
-        <div style={{
-          fontFamily: pixelFont,
-          fontSize: "7px",
-          color: colors.textDim,
-          textAlign: "center",
-          marginBottom: "32px",
-          letterSpacing: "1px",
-        }}>
+        <div
+          style={{
+            fontFamily: pixelFont,
+            fontSize: "7px",
+            color: colors.textDim,
+            textAlign: "center",
+            marginBottom: "32px",
+            letterSpacing: "1px",
+          }}
+        >
           SENSE OF DEFEAT
         </div>
         <div style={styles.card}>
@@ -251,13 +270,15 @@ function PasswordLogin({ onSuccess }: { onSuccess: () => void }) {
               />
             </div>
             {error && (
-              <div style={{
-                color: colors.accentRed,
-                fontSize: "11px",
-                marginBottom: "12px",
-                fontFamily: pixelFont,
-                letterSpacing: "1px",
-              }}>
+              <div
+                style={{
+                  color: colors.accentRed,
+                  fontSize: "11px",
+                  marginBottom: "12px",
+                  fontFamily: pixelFont,
+                  letterSpacing: "1px",
+                }}
+              >
                 {error}
               </div>
             )}
@@ -274,23 +295,28 @@ function PasswordLogin({ onSuccess }: { onSuccess: () => void }) {
               {verifyMutation.isPending ? "CHECKING..." : "LOGIN"}
             </button>
           </form>
-          <div style={{
-            marginTop: "16px",
-            fontSize: "10px",
-            color: colors.textDim,
-            textAlign: "center",
-          }}>
+          <div
+            style={{
+              marginTop: "16px",
+              fontSize: "10px",
+              color: colors.textDim,
+              textAlign: "center",
+            }}
+          >
             ※ 初期パスワード: sod2024admin
           </div>
         </div>
         <div style={{ textAlign: "center", marginTop: "16px" }}>
-          <a href="/" style={{
-            fontFamily: pixelFont,
-            fontSize: "7px",
-            color: colors.textDim,
-            textDecoration: "none",
-            letterSpacing: "1px",
-          }}>
+          <a
+            href="/"
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "7px",
+              color: colors.textDim,
+              textDecoration: "none",
+              letterSpacing: "1px",
+            }}
+          >
             ← BACK TO SITE
           </a>
         </div>
@@ -312,7 +338,7 @@ function LiveEventsManager() {
       setShowForm(false);
       setFlyerPreview(null);
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
   const updateMutation = trpc.liveEvents.update.useMutation({
     onSuccess: () => {
@@ -323,7 +349,7 @@ function LiveEventsManager() {
       setForm(defaultForm);
       setFlyerPreview(null);
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
   const deleteMutation = trpc.liveEvents.delete.useMutation({
     onSuccess: () => {
@@ -331,10 +357,10 @@ function LiveEventsManager() {
       utils.liveEvents.list.invalidate();
       toast.success("削除しました");
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
   const uploadFlyerMutation = trpc.liveEvents.uploadFlyer.useMutation({
-    onError: (e) => toast.error("アップロードエラー: " + e.message),
+    onError: e => toast.error("アップロードエラー: " + e.message),
   });
 
   const defaultForm = {
@@ -356,7 +382,12 @@ function LiveEventsManager() {
   const [flyerPreview, setFlyerPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  const handleEdit = (event: LiveEvent & { flyerImageUrl?: string | null; flyerImageKey?: string | null }) => {
+  const handleEdit = (
+    event: LiveEvent & {
+      flyerImageUrl?: string | null;
+      flyerImageKey?: string | null;
+    }
+  ) => {
     setEditId(event.id);
     setForm({
       eventDate: event.eventDate,
@@ -374,7 +405,9 @@ function LiveEventsManager() {
     setShowForm(true);
   };
 
-  const handleFlyerFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFlyerFileChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
     // Validate file size (max 5MB)
@@ -384,7 +417,7 @@ function LiveEventsManager() {
     }
     // Show local preview immediately
     const reader = new FileReader();
-    reader.onload = (ev) => setFlyerPreview(ev.target?.result as string);
+    reader.onload = ev => setFlyerPreview(ev.target?.result as string);
     reader.readAsDataURL(file);
     // Upload to S3
     setIsUploading(true);
@@ -444,11 +477,22 @@ function LiveEventsManager() {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+        }}
+      >
         <div style={styles.cardTitle}>LIVE EVENTS</div>
         {!showForm && (
           <button
-            onClick={() => { setShowForm(true); setEditId(null); setForm(defaultForm); }}
+            onClick={() => {
+              setShowForm(true);
+              setEditId(null);
+              setForm(defaultForm);
+            }}
             style={styles.btn("success")}
           >
             + ADD EVENT
@@ -457,7 +501,13 @@ function LiveEventsManager() {
       </div>
 
       {showForm && (
-        <div style={{ ...styles.card, marginBottom: "20px", borderColor: colors.accentGreen + "66" }}>
+        <div
+          style={{
+            ...styles.card,
+            marginBottom: "20px",
+            borderColor: colors.accentGreen + "66",
+          }}
+        >
           <div style={{ ...styles.cardTitle, color: colors.accentGreen }}>
             {editId ? "EDIT EVENT" : "NEW EVENT"}
           </div>
@@ -468,7 +518,9 @@ function LiveEventsManager() {
                 <input
                   type="date"
                   value={form.eventDate}
-                  onChange={e => setForm(f => ({ ...f, eventDate: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, eventDate: e.target.value }))
+                  }
                   style={styles.input}
                   required
                 />
@@ -478,7 +530,9 @@ function LiveEventsManager() {
                 <input
                   type="text"
                   value={form.venueName}
-                  onChange={e => setForm(f => ({ ...f, venueName: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, venueName: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="会場名"
                   required
@@ -491,7 +545,9 @@ function LiveEventsManager() {
                 <input
                   type="text"
                   value={form.venueCity}
-                  onChange={e => setForm(f => ({ ...f, venueCity: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, venueCity: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="都市名（例: 熊谷, 東京）"
                 />
@@ -501,7 +557,9 @@ function LiveEventsManager() {
                 <input
                   type="text"
                   value={form.eventTitle}
-                  onChange={e => setForm(f => ({ ...f, eventTitle: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, eventTitle: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="イベント名"
                 />
@@ -513,7 +571,9 @@ function LiveEventsManager() {
                 <input
                   type="url"
                   value={form.ticketUrl}
-                  onChange={e => setForm(f => ({ ...f, ticketUrl: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, ticketUrl: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="https://..."
                 />
@@ -523,7 +583,9 @@ function LiveEventsManager() {
                 <input
                   type="url"
                   value={form.detailUrl}
-                  onChange={e => setForm(f => ({ ...f, detailUrl: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, detailUrl: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="https://..."
                 />
@@ -532,27 +594,56 @@ function LiveEventsManager() {
             {/* Flyer Image Upload */}
             <div style={{ marginBottom: "12px" }}>
               <label style={styles.label}>FLYER IMAGE</label>
-              <div style={{ display: "flex", gap: "12px", alignItems: "flex-start", flexWrap: "wrap" }}>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "12px",
+                  alignItems: "flex-start",
+                  flexWrap: "wrap",
+                }}
+              >
                 {flyerPreview && (
                   <div style={{ position: "relative", flexShrink: 0 }}>
                     <img
                       src={flyerPreview}
                       alt="Flyer preview"
-                      style={{ width: 120, height: 160, objectFit: "cover", border: `1px solid ${colors.border}`, display: "block" }}
+                      style={{
+                        width: 120,
+                        height: 160,
+                        objectFit: "cover",
+                        border: `1px solid ${colors.border}`,
+                        display: "block",
+                      }}
                     />
                     <button
                       type="button"
                       onClick={handleRemoveFlyer}
                       style={{
-                        position: "absolute", top: 2, right: 2,
-                        background: colors.accentRed, color: "#fff",
-                        border: "none", width: 20, height: 20,
-                        cursor: "pointer", fontSize: "12px", lineHeight: "20px", textAlign: "center",
+                        position: "absolute",
+                        top: 2,
+                        right: 2,
+                        background: colors.accentRed,
+                        color: "#fff",
+                        border: "none",
+                        width: 20,
+                        height: 20,
+                        cursor: "pointer",
+                        fontSize: "12px",
+                        lineHeight: "20px",
+                        textAlign: "center",
                       }}
-                    >×</button>
+                    >
+                      ×
+                    </button>
                   </div>
                 )}
-                <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "6px",
+                  }}
+                >
                   <label
                     style={{
                       ...styles.btn("primary"),
@@ -561,7 +652,11 @@ function LiveEventsManager() {
                       display: "inline-block",
                     }}
                   >
-                    {isUploading ? "UPLOADING..." : (flyerPreview ? "CHANGE IMAGE" : "UPLOAD FLYER")}
+                    {isUploading
+                      ? "UPLOADING..."
+                      : flyerPreview
+                        ? "CHANGE IMAGE"
+                        : "UPLOAD FLYER"}
                     <input
                       type="file"
                       accept="image/*"
@@ -570,25 +665,53 @@ function LiveEventsManager() {
                       onChange={handleFlyerFileChange}
                     />
                   </label>
-                  <span style={{ fontSize: "10px", color: colors.textDim }}>JPG/PNG/WEBP ・ 5MB以下</span>
+                  <span style={{ fontSize: "10px", color: colors.textDim }}>
+                    JPG/PNG/WEBP ・ 5MB以下
+                  </span>
                 </div>
               </div>
             </div>
-            <div style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "12px" }}>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", fontSize: "12px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "16px",
+                alignItems: "center",
+                marginBottom: "12px",
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={form.isPublished}
-                  onChange={e => setForm(f => ({ ...f, isPublished: e.target.checked }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, isPublished: e.target.checked }))
+                  }
                 />
                 公開する
               </label>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                <span style={{ fontSize: "11px", color: colors.textDim }}>並び順:</span>
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "8px" }}
+              >
+                <span style={{ fontSize: "11px", color: colors.textDim }}>
+                  並び順:
+                </span>
                 <input
                   type="number"
                   value={form.sortOrder}
-                  onChange={e => setForm(f => ({ ...f, sortOrder: parseInt(e.target.value) || 0 }))}
+                  onChange={e =>
+                    setForm(f => ({
+                      ...f,
+                      sortOrder: parseInt(e.target.value) || 0,
+                    }))
+                  }
                   style={{ ...styles.input, width: "80px" }}
                 />
               </div>
@@ -596,12 +719,24 @@ function LiveEventsManager() {
             <div style={{ display: "flex", gap: "8px" }}>
               <button
                 type="submit"
-                disabled={createMutation.isPending || updateMutation.isPending || isUploading}
+                disabled={
+                  createMutation.isPending ||
+                  updateMutation.isPending ||
+                  isUploading
+                }
                 style={styles.btn("success")}
               >
-                {(createMutation.isPending || updateMutation.isPending) ? "SAVING..." : (editId ? "UPDATE" : "CREATE")}
+                {createMutation.isPending || updateMutation.isPending
+                  ? "SAVING..."
+                  : editId
+                    ? "UPDATE"
+                    : "CREATE"}
               </button>
-              <button type="button" onClick={handleCancel} style={styles.btn("secondary")}>
+              <button
+                type="button"
+                onClick={handleCancel}
+                style={styles.btn("secondary")}
+              >
                 CANCEL
               </button>
             </div>
@@ -610,9 +745,19 @@ function LiveEventsManager() {
       )}
 
       {isLoading ? (
-        <div style={{ color: colors.textDim, fontFamily: pixelFont, fontSize: "8px" }}>LOADING...</div>
+        <div
+          style={{
+            color: colors.textDim,
+            fontFamily: pixelFont,
+            fontSize: "8px",
+          }}
+        >
+          LOADING...
+        </div>
       ) : events.length === 0 ? (
-        <div style={{ color: colors.textDim, fontSize: "13px", padding: "20px 0" }}>
+        <div
+          style={{ color: colors.textDim, fontSize: "13px", padding: "20px 0" }}
+        >
           ライブ情報がありません。「ADD EVENT」から追加してください。
         </div>
       ) : (
@@ -628,12 +773,16 @@ function LiveEventsManager() {
             </tr>
           </thead>
           <tbody>
-            {events.map((event) => (
+            {events.map(event => (
               <tr key={event.id}>
                 <td style={styles.td}>{event.eventDate}</td>
                 <td style={styles.td}>
                   <div>{event.venueName}</div>
-                  {event.venueCity && <div style={{ color: colors.textDim, fontSize: "11px" }}>{event.venueCity}</div>}
+                  {event.venueCity && (
+                    <div style={{ color: colors.textDim, fontSize: "11px" }}>
+                      {event.venueCity}
+                    </div>
+                  )}
                 </td>
                 <td style={styles.td}>{event.eventTitle ?? "-"}</td>
                 <td style={styles.td}>
@@ -641,26 +790,42 @@ function LiveEventsManager() {
                     <img
                       src={(event as any).flyerImageUrl}
                       alt="flyer"
-                      style={{ width: 40, height: 54, objectFit: "cover", border: `1px solid ${colors.border}` }}
+                      style={{
+                        width: 40,
+                        height: 54,
+                        objectFit: "cover",
+                        border: `1px solid ${colors.border}`,
+                      }}
                     />
                   ) : (
-                    <span style={{ color: colors.textDim, fontSize: "10px" }}>-</span>
+                    <span style={{ color: colors.textDim, fontSize: "10px" }}>
+                      -
+                    </span>
                   )}
                 </td>
                 <td style={styles.td}>
-                  <span style={{
-                    fontFamily: pixelFont,
-                    fontSize: "6px",
-                    color: event.isPublished ? colors.accentGreen : colors.textDim,
-                    border: `1px solid ${event.isPublished ? colors.accentGreen : colors.textDim}`,
-                    padding: "2px 6px",
-                  }}>
+                  <span
+                    style={{
+                      fontFamily: pixelFont,
+                      fontSize: "6px",
+                      color: event.isPublished
+                        ? colors.accentGreen
+                        : colors.textDim,
+                      border: `1px solid ${event.isPublished ? colors.accentGreen : colors.textDim}`,
+                      padding: "2px 6px",
+                    }}
+                  >
                     {event.isPublished ? "PUBLIC" : "HIDDEN"}
                   </span>
                 </td>
                 <td style={styles.td}>
                   <div style={{ display: "flex", gap: "6px" }}>
-                    <button onClick={() => handleEdit(event)} style={styles.btn("primary")}>EDIT</button>
+                    <button
+                      onClick={() => handleEdit(event)}
+                      style={styles.btn("primary")}
+                    >
+                      EDIT
+                    </button>
                     <button
                       onClick={() => {
                         if (confirm(`「${event.venueName}」を削除しますか？`)) {
@@ -694,7 +859,7 @@ function DiscographyManager() {
       setForm(defaultForm);
       setShowForm(false);
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
   const updateMutation = trpc.discography.update.useMutation({
     onSuccess: () => {
@@ -704,7 +869,7 @@ function DiscographyManager() {
       setEditId(null);
       setForm(defaultForm);
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
   const deleteMutation = trpc.discography.delete.useMutation({
     onSuccess: () => {
@@ -712,7 +877,7 @@ function DiscographyManager() {
       utils.discography.list.invalidate();
       toast.success("削除しました");
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
 
   const defaultForm = {
@@ -772,15 +937,31 @@ function DiscographyManager() {
     setForm(defaultForm);
   };
 
-  const typeLabels = { single: "Single", ep: "EP", album: "Album", mini_album: "Mini Album" };
+  const typeLabels = {
+    single: "Single",
+    ep: "EP",
+    album: "Album",
+    mini_album: "Mini Album",
+  };
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+        }}
+      >
         <div style={styles.cardTitle}>DISCOGRAPHY</div>
         {!showForm && (
           <button
-            onClick={() => { setShowForm(true); setEditId(null); setForm(defaultForm); }}
+            onClick={() => {
+              setShowForm(true);
+              setEditId(null);
+              setForm(defaultForm);
+            }}
             style={styles.btn("success")}
           >
             + ADD RELEASE
@@ -789,7 +970,13 @@ function DiscographyManager() {
       </div>
 
       {showForm && (
-        <div style={{ ...styles.card, marginBottom: "20px", borderColor: colors.accentPurple + "66" }}>
+        <div
+          style={{
+            ...styles.card,
+            marginBottom: "20px",
+            borderColor: colors.accentPurple + "66",
+          }}
+        >
           <div style={{ ...styles.cardTitle, color: colors.accentPurple }}>
             {editId ? "EDIT RELEASE" : "NEW RELEASE"}
           </div>
@@ -800,7 +987,9 @@ function DiscographyManager() {
                 <input
                   type="text"
                   value={form.title}
-                  onChange={e => setForm(f => ({ ...f, title: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, title: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="リリースタイトル"
                   required
@@ -810,7 +999,12 @@ function DiscographyManager() {
                 <label style={styles.label}>TYPE</label>
                 <select
                   value={form.type}
-                  onChange={e => setForm(f => ({ ...f, type: e.target.value as typeof form.type }))}
+                  onChange={e =>
+                    setForm(f => ({
+                      ...f,
+                      type: e.target.value as typeof form.type,
+                    }))
+                  }
                   style={{ ...styles.input }}
                 >
                   <option value="single">Single</option>
@@ -826,7 +1020,12 @@ function DiscographyManager() {
                 <input
                   type="number"
                   value={form.releaseYear}
-                  onChange={e => setForm(f => ({ ...f, releaseYear: parseInt(e.target.value) || 2024 }))}
+                  onChange={e =>
+                    setForm(f => ({
+                      ...f,
+                      releaseYear: parseInt(e.target.value) || 2024,
+                    }))
+                  }
                   style={styles.input}
                   required
                 />
@@ -836,7 +1035,9 @@ function DiscographyManager() {
                 <input
                   type="date"
                   value={form.releaseDate}
-                  onChange={e => setForm(f => ({ ...f, releaseDate: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, releaseDate: e.target.value }))
+                  }
                   style={styles.input}
                 />
               </div>
@@ -847,7 +1048,9 @@ function DiscographyManager() {
                 <input
                   type="url"
                   value={form.streamingUrl}
-                  onChange={e => setForm(f => ({ ...f, streamingUrl: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, streamingUrl: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="https://linkco.re/..."
                 />
@@ -857,7 +1060,9 @@ function DiscographyManager() {
                 <input
                   type="url"
                   value={form.downloadUrl}
-                  onChange={e => setForm(f => ({ ...f, downloadUrl: e.target.value }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, downloadUrl: e.target.value }))
+                  }
                   style={styles.input}
                   placeholder="https://..."
                 />
@@ -868,7 +1073,9 @@ function DiscographyManager() {
               <input
                 type="url"
                 value={form.coverImageUrl}
-                onChange={e => setForm(f => ({ ...f, coverImageUrl: e.target.value }))}
+                onChange={e =>
+                  setForm(f => ({ ...f, coverImageUrl: e.target.value }))
+                }
                 style={styles.input}
                 placeholder="https://..."
               />
@@ -877,17 +1084,36 @@ function DiscographyManager() {
               <label style={styles.label}>DESCRIPTION</label>
               <textarea
                 value={form.description}
-                onChange={e => setForm(f => ({ ...f, description: e.target.value }))}
+                onChange={e =>
+                  setForm(f => ({ ...f, description: e.target.value }))
+                }
                 style={{ ...styles.input, height: "80px", resize: "vertical" }}
                 placeholder="説明文"
               />
             </div>
-            <div style={{ display: "flex", gap: "16px", alignItems: "center", marginBottom: "12px" }}>
-              <label style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", fontSize: "12px" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "16px",
+                alignItems: "center",
+                marginBottom: "12px",
+              }}
+            >
+              <label
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "8px",
+                  cursor: "pointer",
+                  fontSize: "12px",
+                }}
+              >
                 <input
                   type="checkbox"
                   checked={form.isPublished}
-                  onChange={e => setForm(f => ({ ...f, isPublished: e.target.checked }))}
+                  onChange={e =>
+                    setForm(f => ({ ...f, isPublished: e.target.checked }))
+                  }
                 />
                 公開する
               </label>
@@ -898,9 +1124,17 @@ function DiscographyManager() {
                 disabled={createMutation.isPending || updateMutation.isPending}
                 style={styles.btn("success")}
               >
-                {(createMutation.isPending || updateMutation.isPending) ? "SAVING..." : (editId ? "UPDATE" : "CREATE")}
+                {createMutation.isPending || updateMutation.isPending
+                  ? "SAVING..."
+                  : editId
+                    ? "UPDATE"
+                    : "CREATE"}
               </button>
-              <button type="button" onClick={handleCancel} style={styles.btn("secondary")}>
+              <button
+                type="button"
+                onClick={handleCancel}
+                style={styles.btn("secondary")}
+              >
                 CANCEL
               </button>
             </div>
@@ -909,9 +1143,19 @@ function DiscographyManager() {
       )}
 
       {isLoading ? (
-        <div style={{ color: colors.textDim, fontFamily: pixelFont, fontSize: "8px" }}>LOADING...</div>
+        <div
+          style={{
+            color: colors.textDim,
+            fontFamily: pixelFont,
+            fontSize: "8px",
+          }}
+        >
+          LOADING...
+        </div>
       ) : items.length === 0 ? (
-        <div style={{ color: colors.textDim, fontSize: "13px", padding: "20px 0" }}>
+        <div
+          style={{ color: colors.textDim, fontSize: "13px", padding: "20px 0" }}
+        >
           ディスコグラフィーがありません。「ADD RELEASE」から追加してください。
         </div>
       ) : (
@@ -926,35 +1170,46 @@ function DiscographyManager() {
             </tr>
           </thead>
           <tbody>
-            {items.map((item) => (
+            {items.map(item => (
               <tr key={item.id}>
                 <td style={styles.td}>{item.title}</td>
                 <td style={styles.td}>
-                  <span style={{
-                    fontFamily: pixelFont,
-                    fontSize: "6px",
-                    color: colors.accentPurple,
-                    border: `1px solid ${colors.accentPurple}`,
-                    padding: "2px 6px",
-                  }}>
+                  <span
+                    style={{
+                      fontFamily: pixelFont,
+                      fontSize: "6px",
+                      color: colors.accentPurple,
+                      border: `1px solid ${colors.accentPurple}`,
+                      padding: "2px 6px",
+                    }}
+                  >
                     {typeLabels[item.type]}
                   </span>
                 </td>
                 <td style={styles.td}>{item.releaseYear}</td>
                 <td style={styles.td}>
-                  <span style={{
-                    fontFamily: pixelFont,
-                    fontSize: "6px",
-                    color: item.isPublished ? colors.accentGreen : colors.textDim,
-                    border: `1px solid ${item.isPublished ? colors.accentGreen : colors.textDim}`,
-                    padding: "2px 6px",
-                  }}>
+                  <span
+                    style={{
+                      fontFamily: pixelFont,
+                      fontSize: "6px",
+                      color: item.isPublished
+                        ? colors.accentGreen
+                        : colors.textDim,
+                      border: `1px solid ${item.isPublished ? colors.accentGreen : colors.textDim}`,
+                      padding: "2px 6px",
+                    }}
+                  >
                     {item.isPublished ? "PUBLIC" : "HIDDEN"}
                   </span>
                 </td>
                 <td style={styles.td}>
                   <div style={{ display: "flex", gap: "6px" }}>
-                    <button onClick={() => handleEdit(item)} style={styles.btn("primary")}>EDIT</button>
+                    <button
+                      onClick={() => handleEdit(item)}
+                      style={styles.btn("primary")}
+                    >
+                      EDIT
+                    </button>
                     <button
                       onClick={() => {
                         if (confirm(`「${item.title}」を削除しますか？`)) {
@@ -987,7 +1242,7 @@ function SettingsPanel() {
       setNewPassword("");
       setConfirmPassword("");
     },
-    onError: (e) => toast.error("エラー: " + e.message),
+    onError: e => toast.error("エラー: " + e.message),
   });
 
   const handleChangePassword = async (e: React.FormEvent) => {
@@ -1008,11 +1263,32 @@ function SettingsPanel() {
       <div style={styles.cardTitle}>SETTINGS</div>
       <div style={styles.card}>
         <div style={{ marginBottom: "20px" }}>
-          <div style={{ fontSize: "12px", color: colors.textDim, marginBottom: "4px" }}>ログイン中のユーザー</div>
+          <div
+            style={{
+              fontSize: "12px",
+              color: colors.textDim,
+              marginBottom: "4px",
+            }}
+          >
+            ログイン中のユーザー
+          </div>
           <div style={{ fontSize: "14px" }}>{user?.name ?? "不明"}</div>
         </div>
-        <div style={{ borderTop: `1px solid ${colors.border}`, paddingTop: "20px", marginBottom: "20px" }}>
-          <div style={{ fontFamily: pixelFont, fontSize: "8px", color: colors.accent, marginBottom: "16px" }}>
+        <div
+          style={{
+            borderTop: `1px solid ${colors.border}`,
+            paddingTop: "20px",
+            marginBottom: "20px",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "8px",
+              color: colors.accent,
+              marginBottom: "16px",
+            }}
+          >
             CHANGE ADMIN PASSWORD
           </div>
           <form onSubmit={handleChangePassword}>
@@ -1042,11 +1318,18 @@ function SettingsPanel() {
               disabled={changePasswordMutation.isPending}
               style={styles.btn("primary")}
             >
-              {changePasswordMutation.isPending ? "SAVING..." : "CHANGE PASSWORD"}
+              {changePasswordMutation.isPending
+                ? "SAVING..."
+                : "CHANGE PASSWORD"}
             </button>
           </form>
         </div>
-        <div style={{ borderTop: `1px solid ${colors.border}`, paddingTop: "20px" }}>
+        <div
+          style={{
+            borderTop: `1px solid ${colors.border}`,
+            paddingTop: "20px",
+          }}
+        >
           <button
             onClick={() => {
               sessionStorage.removeItem("admin_verified");
@@ -1065,7 +1348,9 @@ function SettingsPanel() {
 // ---- Main Admin Page ----
 export default function AdminPage() {
   const { user, loading } = useAuth();
-  const [section, setSection] = useState<"live" | "discography" | "settings">("live");
+  const [section, setSection] = useState<"live" | "discography" | "settings">(
+    "live"
+  );
   const [isVerified, setIsVerified] = useState(() => {
     return sessionStorage.getItem("admin_verified") === "true";
   });
@@ -1073,17 +1358,48 @@ export default function AdminPage() {
   // If not logged in, redirect to login
   if (loading) {
     return (
-      <div style={{ minHeight: "100vh", background: colors.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ fontFamily: pixelFont, fontSize: "8px", color: colors.textDim }}>LOADING...</div>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: colors.bg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: pixelFont,
+            fontSize: "8px",
+            color: colors.textDim,
+          }}
+        >
+          LOADING...
+        </div>
       </div>
     );
   }
 
   if (!user) {
     return (
-      <div style={{ minHeight: "100vh", background: colors.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: colors.bg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontFamily: pixelFont, fontSize: "8px", color: colors.textDim, marginBottom: "16px" }}>
+          <div
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "8px",
+              color: colors.textDim,
+              marginBottom: "16px",
+            }}
+          >
             管理ページにアクセスするにはログインが必要です
           </div>
           <a
@@ -1097,7 +1413,15 @@ export default function AdminPage() {
             LOGIN WITH MANUS
           </a>
           <div style={{ marginTop: "16px" }}>
-            <a href="/" style={{ fontFamily: pixelFont, fontSize: "7px", color: colors.textDim, textDecoration: "none" }}>
+            <a
+              href="/"
+              style={{
+                fontFamily: pixelFont,
+                fontSize: "7px",
+                color: colors.textDim,
+                textDecoration: "none",
+              }}
+            >
               ← BACK TO SITE
             </a>
           </div>
@@ -1109,15 +1433,44 @@ export default function AdminPage() {
   // Check if user is admin
   if (user.role !== "admin") {
     return (
-      <div style={{ minHeight: "100vh", background: colors.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: colors.bg,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontFamily: pixelFont, fontSize: "8px", color: colors.accentRed, marginBottom: "8px" }}>
+          <div
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "8px",
+              color: colors.accentRed,
+              marginBottom: "8px",
+            }}
+          >
             ACCESS DENIED
           </div>
-          <div style={{ fontSize: "13px", color: colors.textDim, marginBottom: "16px" }}>
+          <div
+            style={{
+              fontSize: "13px",
+              color: colors.textDim,
+              marginBottom: "16px",
+            }}
+          >
             管理者権限がありません
           </div>
-          <a href="/" style={{ fontFamily: pixelFont, fontSize: "7px", color: colors.textDim, textDecoration: "none" }}>
+          <a
+            href="/"
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "7px",
+              color: colors.textDim,
+              textDecoration: "none",
+            }}
+          >
             ← BACK TO SITE
           </a>
         </div>
@@ -1136,19 +1489,35 @@ export default function AdminPage() {
       <div style={styles.header}>
         <div>
           <div style={styles.headerTitle}>ADMIN PANEL</div>
-          <div style={{ fontFamily: pixelFont, fontSize: "6px", color: colors.textDim, marginTop: "2px" }}>
+          <div
+            style={{
+              fontFamily: pixelFont,
+              fontSize: "6px",
+              color: colors.textDim,
+              marginTop: "2px",
+            }}
+          >
             SENSE OF DEFEAT
           </div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div style={styles.nav}>
-            <button onClick={() => setSection("live")} style={styles.navBtn(section === "live")}>
+            <button
+              onClick={() => setSection("live")}
+              style={styles.navBtn(section === "live")}
+            >
               LIVE
             </button>
-            <button onClick={() => setSection("discography")} style={styles.navBtn(section === "discography")}>
+            <button
+              onClick={() => setSection("discography")}
+              style={styles.navBtn(section === "discography")}
+            >
               DISCO
             </button>
-            <button onClick={() => setSection("settings")} style={styles.navBtn(section === "settings")}>
+            <button
+              onClick={() => setSection("settings")}
+              style={styles.navBtn(section === "settings")}
+            >
               SETTINGS
             </button>
           </div>

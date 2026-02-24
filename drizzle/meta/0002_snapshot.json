@@ -43,17 +43,13 @@
       "compositePrimaryKeys": {
         "admin_settings_id": {
           "name": "admin_settings_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "admin_settings_settingKey_unique": {
           "name": "admin_settings_settingKey_unique",
-          "columns": [
-            "settingKey"
-          ]
+          "columns": ["settingKey"]
         }
       },
       "checkConstraint": {}
@@ -164,9 +160,7 @@
       "compositePrimaryKeys": {
         "discography_id": {
           "name": "discography_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -277,9 +271,7 @@
       "compositePrimaryKeys": {
         "live_events_id": {
           "name": "live_events_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {},
@@ -362,17 +354,13 @@
       "compositePrimaryKeys": {
         "users_id": {
           "name": "users_id",
-          "columns": [
-            "id"
-          ]
+          "columns": ["id"]
         }
       },
       "uniqueConstraints": {
         "users_openId_unique": {
           "name": "users_openId_unique",
-          "columns": [
-            "openId"
-          ]
+          "columns": ["openId"]
         }
       },
       "checkConstraint": {}

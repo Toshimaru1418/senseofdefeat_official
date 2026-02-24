@@ -26,7 +26,13 @@ describe("Admin DB helpers", () => {
   describe("Live Events", () => {
     it("getLiveEvents returns published events only when publishedOnly=true", async () => {
       const mockEvents = [
-        { id: 1, eventDate: "2026-03-15", venueName: "渋谷 CLUB QUATTRO", isPublished: true, sortOrder: 0 },
+        {
+          id: 1,
+          eventDate: "2026-03-15",
+          venueName: "渋谷 CLUB QUATTRO",
+          isPublished: true,
+          sortOrder: 0,
+        },
       ];
       vi.mocked(db.getLiveEvents).mockResolvedValue(mockEvents as any);
 
@@ -58,7 +64,9 @@ describe("Admin DB helpers", () => {
 
       await db.updateLiveEvent(1, { venueName: "Updated Venue" });
 
-      expect(db.updateLiveEvent).toHaveBeenCalledWith(1, { venueName: "Updated Venue" });
+      expect(db.updateLiveEvent).toHaveBeenCalledWith(1, {
+        venueName: "Updated Venue",
+      });
     });
 
     it("deleteLiveEvent is called with correct id", async () => {
@@ -73,7 +81,14 @@ describe("Admin DB helpers", () => {
   describe("Discography", () => {
     it("getDiscography returns published items when publishedOnly=true", async () => {
       const mockItems = [
-        { id: 1, title: "Paradigm Down", releaseYear: 2024, type: "single", isPublished: true, sortOrder: 0 },
+        {
+          id: 1,
+          title: "Paradigm Down",
+          releaseYear: 2024,
+          type: "single",
+          isPublished: true,
+          sortOrder: 0,
+        },
       ];
       vi.mocked(db.getDiscography).mockResolvedValue(mockItems as any);
 
@@ -123,7 +138,10 @@ describe("Admin DB helpers", () => {
 
       await db.setAdminSetting("admin_password", "new_password");
 
-      expect(db.setAdminSetting).toHaveBeenCalledWith("admin_password", "new_password");
+      expect(db.setAdminSetting).toHaveBeenCalledWith(
+        "admin_password",
+        "new_password"
+      );
     });
   });
 

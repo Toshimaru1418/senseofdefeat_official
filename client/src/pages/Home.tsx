@@ -161,6 +161,7 @@ export default function Home() {
     stateRef,
     gamePhase,
     modalContent,
+    currentBgm,
     playerHp,
     maxHp,
     score,
@@ -173,6 +174,19 @@ export default function Home() {
     CANVAS_WIDTH,
     CANVAS_HEIGHT,
   } = useGameEngine(canvasRef);
+
+  // Update BGM when player hits a music note
+  useEffect(() => {
+    if (bgmRef.current && currentBgm) {
+      // Check if we actually need to change it
+      if (!bgmRef.current.src.endsWith(currentBgm)) {
+        bgmRef.current.src = currentBgm;
+        if (bgmEnabled) {
+          bgmRef.current.play().catch(() => { });
+        }
+      }
+    }
+  }, [currentBgm, bgmEnabled]);
 
   useGameRenderer(canvasRef, stateRef, bgImageRef);
 

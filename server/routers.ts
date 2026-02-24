@@ -46,47 +46,53 @@ export const appRouter = router({
       return await getLiveEvents(false);
     }),
     create: adminProcedure
-      .input(z.object({
-        eventDate: z.string().min(1),
-        venueName: z.string().min(1),
-        venueCity: z.string().optional(),
-        eventTitle: z.string().optional(),
-        ticketUrl: z.string().optional(),
-        detailUrl: z.string().optional(),
-        flyerImageUrl: z.string().optional(),
-        flyerImageKey: z.string().optional(),
-        isPublished: z.boolean().default(true),
-        sortOrder: z.number().default(0),
-      }))
+      .input(
+        z.object({
+          eventDate: z.string().min(1),
+          venueName: z.string().min(1),
+          venueCity: z.string().optional(),
+          eventTitle: z.string().optional(),
+          ticketUrl: z.string().optional(),
+          detailUrl: z.string().optional(),
+          flyerImageUrl: z.string().optional(),
+          flyerImageKey: z.string().optional(),
+          isPublished: z.boolean().default(true),
+          sortOrder: z.number().default(0),
+        })
+      )
       .mutation(async ({ input }) => {
         await createLiveEvent(input);
         return { success: true };
       }),
     update: adminProcedure
-      .input(z.object({
-        id: z.number(),
-        eventDate: z.string().optional(),
-        venueName: z.string().optional(),
-        venueCity: z.string().optional(),
-        eventTitle: z.string().optional(),
-        ticketUrl: z.string().optional(),
-        detailUrl: z.string().optional(),
-        flyerImageUrl: z.string().optional(),
-        flyerImageKey: z.string().optional(),
-        isPublished: z.boolean().optional(),
-        sortOrder: z.number().optional(),
-      }))
+      .input(
+        z.object({
+          id: z.number(),
+          eventDate: z.string().optional(),
+          venueName: z.string().optional(),
+          venueCity: z.string().optional(),
+          eventTitle: z.string().optional(),
+          ticketUrl: z.string().optional(),
+          detailUrl: z.string().optional(),
+          flyerImageUrl: z.string().optional(),
+          flyerImageKey: z.string().optional(),
+          isPublished: z.boolean().optional(),
+          sortOrder: z.number().optional(),
+        })
+      )
       .mutation(async ({ input }) => {
         const { id, ...data } = input;
         await updateLiveEvent(id, data);
         return { success: true };
       }),
     uploadFlyer: adminProcedure
-      .input(z.object({
-        fileName: z.string(),
-        fileBase64: z.string(), // base64 encoded file
-        mimeType: z.string(),
-      }))
+      .input(
+        z.object({
+          fileName: z.string(),
+          fileBase64: z.string(), // base64 encoded file
+          mimeType: z.string(),
+        })
+      )
       .mutation(async ({ input }) => {
         const { fileName, fileBase64, mimeType } = input;
         const buffer = Buffer.from(fileBase64, "base64");
@@ -113,36 +119,42 @@ export const appRouter = router({
       return await getDiscography(false);
     }),
     create: adminProcedure
-      .input(z.object({
-        title: z.string().min(1),
-        releaseYear: z.number(),
-        releaseDate: z.string().optional(),
-        type: z.enum(["single", "ep", "album", "mini_album"]).default("single"),
-        streamingUrl: z.string().optional(),
-        downloadUrl: z.string().optional(),
-        coverImageUrl: z.string().optional(),
-        description: z.string().optional(),
-        isPublished: z.boolean().default(true),
-        sortOrder: z.number().default(0),
-      }))
+      .input(
+        z.object({
+          title: z.string().min(1),
+          releaseYear: z.number(),
+          releaseDate: z.string().optional(),
+          type: z
+            .enum(["single", "ep", "album", "mini_album"])
+            .default("single"),
+          streamingUrl: z.string().optional(),
+          downloadUrl: z.string().optional(),
+          coverImageUrl: z.string().optional(),
+          description: z.string().optional(),
+          isPublished: z.boolean().default(true),
+          sortOrder: z.number().default(0),
+        })
+      )
       .mutation(async ({ input }) => {
         await createDiscography(input);
         return { success: true };
       }),
     update: adminProcedure
-      .input(z.object({
-        id: z.number(),
-        title: z.string().optional(),
-        releaseYear: z.number().optional(),
-        releaseDate: z.string().optional(),
-        type: z.enum(["single", "ep", "album", "mini_album"]).optional(),
-        streamingUrl: z.string().optional(),
-        downloadUrl: z.string().optional(),
-        coverImageUrl: z.string().optional(),
-        description: z.string().optional(),
-        isPublished: z.boolean().optional(),
-        sortOrder: z.number().optional(),
-      }))
+      .input(
+        z.object({
+          id: z.number(),
+          title: z.string().optional(),
+          releaseYear: z.number().optional(),
+          releaseDate: z.string().optional(),
+          type: z.enum(["single", "ep", "album", "mini_album"]).optional(),
+          streamingUrl: z.string().optional(),
+          downloadUrl: z.string().optional(),
+          coverImageUrl: z.string().optional(),
+          description: z.string().optional(),
+          isPublished: z.boolean().optional(),
+          sortOrder: z.number().optional(),
+        })
+      )
       .mutation(async ({ input }) => {
         const { id, ...data } = input;
         await updateDiscography(id, data);

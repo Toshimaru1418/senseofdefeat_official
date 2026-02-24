@@ -6,7 +6,8 @@
 
 import { useEffect, useState } from "react";
 
-const HERO_BANNER_URL = "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-4_1771547729000_na1fn_aGVyby1iYW5uZXI.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTRfMTc3MTU0NzcyOTAwMF9uYTFmbl9hR1Z5YnkxaVlXNXVaWEkucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=XkOmGX70-TZ5s0mWd3AvcTjQCFNhLT7lneHta79xZ-JPeL6jXfIjghUujFkV7~dK9wtskeLXz02CPU6g~yags5nFWpAQxZaaTAmzTDSvHYDzhrY4RiRk3710hpHy0Np-nk5tNwB1w28OYmusluzfJbrzeTV~c1RzUie8YDxt9Xm03vDuIq8H0ALtmt9A73v-5U8fujAUNbbsJ2JyVFyL~D1aEWVaLBrjXVSzNOlpZBXsd6zl-t6uvMJBUsG0mhZ79v96dBFB6q6nGyp9XjzKCctxGbsE7azXUEWgwJC1sVrX8mcClfNz-GIR3rwqWCVKOX-34XKSDsVBxltbm1xafA__";
+const HERO_BANNER_URL =
+  "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-4_1771547729000_na1fn_aGVyby1iYW5uZXI.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTRfMTc3MTU0NzcyOTAwMF9uYTFmbl9hR1Z5YnkxaVlXNXVaWEkucG5nP3gtb3NzLXByb2Nlc3M9aW1hZ2UvcmVzaXplLHdfMTkyMCxoXzE5MjAvZm9ybWF0LHdlYnAvcXVhbGl0eSxxXzgwIiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzk4NzYxNjAwfX19XX0_&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=XkOmGX70-TZ5s0mWd3AvcTjQCFNhLT7lneHta79xZ-JPeL6jXfIjghUujFkV7~dK9wtskeLXz02CPU6g~yags5nFWpAQxZaaTAmzTDSvHYDzhrY4RiRk3710hpHy0Np-nk5tNwB1w28OYmusluzfJbrzeTV~c1RzUie8YDxt9Xm03vDuIq8H0ALtmt9A73v-5U8fujAUNbbsJ2JyVFyL~D1aEWVaLBrjXVSzNOlpZBXsd6zl-t6uvMJBUsG0mhZ79v96dBFB6q6nGyp9XjzKCctxGbsE7azXUEWgwJC1sVrX8mcClfNz-GIR3rwqWCVKOX-34XKSDsVBxltbm1xafA__";
 
 interface TitleScreenProps {
   onStart: () => void;
@@ -38,7 +39,8 @@ export function TitleScreen({ onStart }: TitleScreenProps) {
     <div
       className="absolute inset-0 flex flex-col items-center justify-center overflow-hidden"
       style={{
-        background: "linear-gradient(180deg, #0a0020 0%, #1a0040 30%, #3a0060 60%, #5a0080 80%, #1a0533 100%)",
+        background:
+          "linear-gradient(180deg, #0a0020 0%, #1a0040 30%, #3a0060 60%, #5a0080 80%, #1a0533 100%)",
         overflowX: "hidden",
         overflowY: "hidden",
         opacity: visible ? 1 : 0,
@@ -191,7 +193,7 @@ export function TitleScreen({ onStart }: TitleScreenProps) {
             { key: "← →", desc: "移動" },
             { key: "↑ / SPC", desc: "ジャンプ" },
             { key: "Z", desc: "ショット" },
-          ].map((c) => (
+          ].map(c => (
             <div key={c.key} className="text-center">
               <div
                 style={{

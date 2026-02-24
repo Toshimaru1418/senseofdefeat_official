@@ -8,15 +8,40 @@
 import { useEffect, useRef } from "react";
 import type { GameState } from "./useGameEngine";
 
-const BG_URL = "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-1_1771547719000_na1fn_YmctY2l0eS1kdXNr.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTFfMTc3MTU0NzcxOTAwMF9uYTFmbl9ZbWN0WTJsMGVTMWtkWE5yLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=VPRrtSejcJXwIWI~fJr90Y07uq8z6MLLEEmcICeKf~~R36VeWDUZwSelsHMdc4TysR3t1~4dAW6VeAu9hbKQtS4GLzxTT7-xjTNTGmCFEttHWK0r0QKqpl8BVGc0EOwSb9f2BiZCEMBt9yqBBReI9S1~Hwb3cXAHNx0mPnG-rzh2~dVwaUD4MdPMBrEjvPBIql73HBWXUBkRP6v58KLnca7V9ISp98czxsr2fNFppCstOQZqUxsPqLlt37Np3K6GdEw56VO8vWQb~nUtYBFJ19ocrH15g~FwltOVrtV~oqu0bnkINKiL~17DsIefklvA31SG2gd9xmc1db0jtyN0Gw__";
+const BG_URL =
+  "https://private-us-east-1.manuscdn.com/sessionFile/OF4owkOAOtXCBr8PZSv4fO/sandbox/BnViflfwys8UwLHFLJ6rtl-img-1_1771547719000_na1fn_YmctY2l0eS1kdXNr.png?x-oss-process=image/resize,w_1920,h_1920/format,webp/quality,q_80&Expires=1798761600&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9wcml2YXRlLXVzLWVhc3QtMS5tYW51c2Nkbi5jb20vc2Vzc2lvbkZpbGUvT0Y0b3drT0FPdFhDQnI4UFpTdjRmTy9zYW5kYm94L0JuVmlmbGZ3eXM4VXdMSEZMSjZydGwtaW1nLTFfMTc3MTU0NzcxOTAwMF9uYTFmbl9ZbWN0WTJsMGVTMWtkWE5yLnBuZz94LW9zcy1wcm9jZXNzPWltYWdlL3Jlc2l6ZSx3XzE5MjAsaF8xOTIwL2Zvcm1hdCx3ZWJwL3F1YWxpdHkscV84MCIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTc5ODc2MTYwMH19fV19&Key-Pair-Id=K2HSFNDJXOU9YS&Signature=VPRrtSejcJXwIWI~fJr90Y07uq8z6MLLEEmcICeKf~~R36VeWDUZwSelsHMdc4TysR3t1~4dAW6VeAu9hbKQtS4GLzxTT7-xjTNTGmCFEttHWK0r0QKqpl8BVGc0EOwSb9f2BiZCEMBt9yqBBReI9S1~Hwb3cXAHNx0mPnG-rzh2~dVwaUD4MdPMBrEjvPBIql73HBWXUBkRP6v58KLnca7V9ISp98czxsr2fNFppCstOQZqUxsPqLlt37Np3K6GdEw56VO8vWQb~nUtYBFJ19ocrH15g~FwltOVrtV~oqu0bnkINKiL~17DsIefklvA31SG2gd9xmc1db0jtyN0Gw__";
 
 // Stage section definitions
 const STAGE_SECTIONS = [
   { start: 0, end: 700, name: "STAGE 1", color: "#1565c0", bgColor: "#1a0533" },
-  { start: 700, end: 1500, name: "PROFILE", color: "#00e5ff", bgColor: "#0a1a3a" },
-  { start: 1500, end: 2500, name: "DISCOGRAPHY", color: "#aa00ff", bgColor: "#1a0a3a" },
-  { start: 2500, end: 3600, name: "LIVE", color: "#ff6d00", bgColor: "#2a0a0a" },
-  { start: 3600, end: 5000, name: "FINAL", color: "#ff1744", bgColor: "#1a0020" },
+  {
+    start: 700,
+    end: 1500,
+    name: "PROFILE",
+    color: "#00e5ff",
+    bgColor: "#0a1a3a",
+  },
+  {
+    start: 1500,
+    end: 2500,
+    name: "DISCOGRAPHY",
+    color: "#aa00ff",
+    bgColor: "#1a0a3a",
+  },
+  {
+    start: 2500,
+    end: 3600,
+    name: "LIVE",
+    color: "#ff6d00",
+    bgColor: "#2a0a0a",
+  },
+  {
+    start: 3600,
+    end: 5000,
+    name: "FINAL",
+    color: "#ff1744",
+    bgColor: "#1a0020",
+  },
 ];
 
 function getSectionColor(cameraX: number): string {
@@ -33,7 +58,15 @@ function getSectionBg(cameraX: number): string {
   return "#1a0533";
 }
 
-function drawPixelText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, size: number, color: string, glow = false) {
+function drawPixelText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  size: number,
+  color: string,
+  glow = false
+) {
   ctx.font = `${size}px 'Press Start 2P', monospace`;
   ctx.fillStyle = color;
   ctx.textAlign = "center";
@@ -45,7 +78,16 @@ function drawPixelText(ctx: CanvasRenderingContext2D, text: string, x: number, y
   ctx.shadowBlur = 0;
 }
 
-function drawPlayer(ctx: CanvasRenderingContext2D, x: number, y: number, dir: 1 | -1, animState: string, animFrame: number, invincible: boolean, hurtTimer: number) {
+function drawPlayer(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  dir: 1 | -1,
+  animState: string,
+  animFrame: number,
+  invincible: boolean,
+  hurtTimer: number
+) {
   const px = Math.round(x);
   const py = Math.round(y);
 
@@ -147,7 +189,22 @@ function drawPlayer(ctx: CanvasRenderingContext2D, x: number, y: number, dir: 1 
   ctx.restore();
 }
 
-function drawEnemy(ctx: CanvasRenderingContext2D, enemy: { x: number; y: number; width: number; height: number; type: string; direction: 1 | -1; animFrame: number; flashTimer: number; hp: number; maxHp: number; animTimer: number }) {
+function drawEnemy(
+  ctx: CanvasRenderingContext2D,
+  enemy: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    type: string;
+    direction: 1 | -1;
+    animFrame: number;
+    flashTimer: number;
+    hp: number;
+    maxHp: number;
+    animTimer: number;
+  }
+) {
   const { x, y, width, height, type, direction, animFrame, flashTimer } = enemy;
   const px = Math.round(x);
   const py = Math.round(y);
@@ -274,7 +331,8 @@ function drawEnemy(ctx: CanvasRenderingContext2D, enemy: { x: number; y: number;
     const hpRatio = enemy.hp / enemy.maxHp;
     ctx.fillStyle = "#111";
     ctx.fillRect(px + 2, py - 18, barW, 10);
-    ctx.fillStyle = hpRatio > 0.5 ? "#4caf50" : hpRatio > 0.25 ? "#ff9800" : "#f44336";
+    ctx.fillStyle =
+      hpRatio > 0.5 ? "#4caf50" : hpRatio > 0.25 ? "#ff9800" : "#f44336";
     ctx.fillRect(px + 2, py - 18, barW * hpRatio, 10);
     ctx.strokeStyle = "#ffffff66";
     ctx.lineWidth = 1;
@@ -313,7 +371,17 @@ function drawEnemy(ctx: CanvasRenderingContext2D, enemy: { x: number; y: number;
   ctx.globalAlpha = 1;
 }
 
-function drawGimmick(ctx: CanvasRenderingContext2D, gimmick: { x: number; y: number; width: number; height: number; type: string; label: string }) {
+function drawGimmick(
+  ctx: CanvasRenderingContext2D,
+  gimmick: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    type: string;
+    label: string;
+  }
+) {
   const { x, y, width, height, type, label } = gimmick;
   const px = Math.round(x);
   const py = Math.round(y);
@@ -326,6 +394,7 @@ function drawGimmick(ctx: CanvasRenderingContext2D, gimmick: { x: number; y: num
     discography: "#aa00ff",
     live: "#ff6d00",
     info: "#00e676",
+    music_note: "#ffeb3b",
   };
   const color = colors[type] || "#ffffff";
 
@@ -399,6 +468,16 @@ function drawGimmick(ctx: CanvasRenderingContext2D, gimmick: { x: number; y: num
     ctx.lineTo(cx - 2, cy);
     ctx.closePath();
     ctx.fill();
+  } else if (type === "music_note") {
+    // Musical note
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(cx - 3, cy + 4, 3, 0, Math.PI * 2);
+    ctx.arc(cx + 5, cy + 2, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillRect(cx - 1, cy - 6, 2, 11);
+    ctx.fillRect(cx + 7, cy - 8, 2, 11);
+    ctx.fillRect(cx - 1, cy - 8, 10, 3);
   } else {
     // Star / info
     ctx.fillStyle = color;
@@ -436,7 +515,10 @@ function drawGimmick(ctx: CanvasRenderingContext2D, gimmick: { x: number; y: num
   ctx.fillRect(cx - 2, arrowY + 8, 4, 4);
 }
 
-function drawBullet(ctx: CanvasRenderingContext2D, bullet: { x: number; y: number; vx: number, isCharged?: boolean }) {
+function drawBullet(
+  ctx: CanvasRenderingContext2D,
+  bullet: { x: number; y: number; vx: number; isCharged?: boolean }
+) {
   const dir = bullet.vx > 0 ? 1 : -1;
   const bx = Math.round(bullet.x);
   const by = Math.round(bullet.y);
@@ -448,20 +530,46 @@ function drawBullet(ctx: CanvasRenderingContext2D, bullet: { x: number; y: numbe
 
   // Trail
   ctx.fillStyle = "#00e5ff44";
-  ctx.fillRect(bx - (isC ? 20 : 12) * dir, by - (isC ? 4 : 2), isC ? 20 : 12, isC ? 8 : 4);
+  ctx.fillRect(
+    bx - (isC ? 20 : 12) * dir,
+    by - (isC ? 4 : 2),
+    isC ? 20 : 12,
+    isC ? 8 : 4
+  );
 
   // Main bullet
   ctx.fillStyle = "#00e5ff";
-  ctx.fillRect(bx - (isC ? 12 : 8) * (dir === -1 ? 1 : 0), by - (isC ? 8 : 4), isC ? 24 : 16, isC ? 16 : 8);
+  ctx.fillRect(
+    bx - (isC ? 12 : 8) * (dir === -1 ? 1 : 0),
+    by - (isC ? 8 : 4),
+    isC ? 24 : 16,
+    isC ? 16 : 8
+  );
 
   // Core
   ctx.fillStyle = "#ffffff";
-  ctx.fillRect(bx - (isC ? 6 : 4) * (dir === -1 ? 1 : 0), by - (isC ? 4 : 2), isC ? 12 : 8, isC ? 8 : 4);
+  ctx.fillRect(
+    bx - (isC ? 6 : 4) * (dir === -1 ? 1 : 0),
+    by - (isC ? 4 : 2),
+    isC ? 12 : 8,
+    isC ? 8 : 4
+  );
 
   ctx.shadowBlur = 0;
 }
 
-function drawPlatform(ctx: CanvasRenderingContext2D, plat: { x: number; y: number; width: number; height: number; type: string; color?: string }, camX: number) {
+function drawPlatform(
+  ctx: CanvasRenderingContext2D,
+  plat: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    type: string;
+    color?: string;
+  },
+  camX: number
+) {
   const px = Math.round(plat.x - camX);
   const py = Math.round(plat.y);
 
@@ -519,7 +627,13 @@ function drawPlatform(ctx: CanvasRenderingContext2D, plat: { x: number; y: numbe
   }
 }
 
-function drawBackground(ctx: CanvasRenderingContext2D, cameraX: number, W: number, H: number, bgImg: HTMLImageElement | null) {
+function drawBackground(
+  ctx: CanvasRenderingContext2D,
+  cameraX: number,
+  W: number,
+  H: number,
+  bgImg: HTMLImageElement | null
+) {
   // Dynamic sky based on section
   const bgColor = getSectionBg(cameraX);
   const skyGrad = ctx.createLinearGradient(0, 0, 0, H);
@@ -545,10 +659,14 @@ function drawBackground(ctx: CanvasRenderingContext2D, cameraX: number, W: numbe
   }
 
   // Stars (far parallax)
-  const starSeeds = [17, 31, 53, 71, 89, 103, 127, 149, 163, 181, 199, 211, 223, 233, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347];
+  const starSeeds = [
+    17, 31, 53, 71, 89, 103, 127, 149, 163, 181, 199, 211, 223, 233, 251, 257,
+    263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347,
+  ];
   const t = Date.now();
   for (let i = 0; i < 30; i++) {
-    const sx = ((starSeeds[i % 30] * (i + 1) * 137.5 + cameraX * 0.03) % W + W) % W;
+    const sx =
+      (((starSeeds[i % 30] * (i + 1) * 137.5 + cameraX * 0.03) % W) + W) % W;
     const sy = (starSeeds[i % 30] * (i + 3) * 97.3) % (H * 0.55);
     const twinkle = Math.sin(t * 0.002 + i * 0.7) * 0.4 + 0.6;
     ctx.globalAlpha = 0.2 + twinkle * 0.6;
@@ -567,7 +685,8 @@ function drawBackground(ctx: CanvasRenderingContext2D, cameraX: number, W: numbe
   ctx.fillRect(0, H - 120, W, 120);
 }
 
-const PLAYER_IMG_URL = "https://files.manuscdn.com/user_upload_by_module/session_file/95086222/jnqEcDrtgJKSiLGp.png";
+const PLAYER_IMG_URL =
+  "https://files.manuscdn.com/user_upload_by_module/session_file/95086222/jnqEcDrtgJKSiLGp.png";
 
 export function useGameRenderer(
   canvasRef: React.RefObject<HTMLCanvasElement | null>,
@@ -583,12 +702,14 @@ export function useGameRenderer(
       { id: "yuichi", url: "/yuichi.png" },
       { id: "ramirez", url: "/ramirez.png" },
       { id: "yuj", url: "/yuj.png" },
-      { id: "mirko", url: "/mirko.png" }
+      { id: "mirko", url: "/mirko.png" },
     ];
-    chars.forEach((c) => {
+    chars.forEach(c => {
       const img = new Image();
       img.src = c.url;
-      img.onload = () => { playerImgRefs.current[c.id] = img; };
+      img.onload = () => {
+        playerImgRefs.current[c.id] = img;
+      };
     });
   }, []);
 
@@ -602,7 +723,15 @@ export function useGameRenderer(
 
     const render = () => {
       const state = stateRef.current;
-      const { cameraX, player, platforms, enemies, gimmicks, bullets, particles } = state;
+      const {
+        cameraX,
+        player,
+        platforms,
+        enemies,
+        gimmicks,
+        bullets,
+        particles,
+      } = state;
       const W = canvas.width;
       const H = canvas.height;
 
@@ -648,7 +777,12 @@ export function useGameRenderer(
         const alpha = p.life / p.maxLife;
         ctx.globalAlpha = alpha;
         ctx.fillStyle = p.color;
-        ctx.fillRect(Math.round(screenX - p.size / 2), Math.round(p.y - p.size / 2), Math.round(p.size), Math.round(p.size));
+        ctx.fillRect(
+          Math.round(screenX - p.size / 2),
+          Math.round(p.y - p.size / 2),
+          Math.round(p.size),
+          Math.round(p.size)
+        );
       }
       ctx.globalAlpha = 1;
 
@@ -660,11 +794,16 @@ export function useGameRenderer(
 
         if (pImg && pImg.complete && pImg.naturalWidth > 0) {
           // Blink when invincible
-          if (player.invincibleTimer > 0 && Math.floor(Date.now() / 80) % 2 === 0) {
+          if (
+            player.invincibleTimer > 0 &&
+            Math.floor(Date.now() / 80) % 2 === 0
+          ) {
             // skip draw (blink)
           } else {
             let imgH = 80;
-            let imgW = pImg.naturalHeight ? Math.round((pImg.naturalWidth / pImg.naturalHeight) * imgH) : 58;
+            let imgW = pImg.naturalHeight
+              ? Math.round((pImg.naturalWidth / pImg.naturalHeight) * imgH)
+              : 58;
 
             const drawY = Math.round(player.y + player.height - imgH);
             ctx.save();
@@ -673,18 +812,36 @@ export function useGameRenderer(
             }
             if (player.direction === -1) {
               // Flip horizontally
-              ctx.translate(Math.round(playerScreenX) + player.width / 2 + imgW / 2, 0);
+              ctx.translate(
+                Math.round(playerScreenX) + player.width / 2 + imgW / 2,
+                0
+              );
               ctx.scale(-1, 1);
               ctx.drawImage(pImg, 0, drawY, imgW, imgH);
             } else {
               const offsetX = (imgW - player.width) / 2;
-              ctx.drawImage(pImg, Math.round(playerScreenX) - offsetX, drawY, imgW, imgH);
+              ctx.drawImage(
+                pImg,
+                Math.round(playerScreenX) - offsetX,
+                drawY,
+                imgW,
+                imgH
+              );
             }
             ctx.restore();
           }
         } else {
           // Fallback
-          drawPlayer(ctx, playerScreenX, player.y, player.direction, player.animState, player.animFrame, player.invincibleTimer > 0, player.hurtTimer);
+          drawPlayer(
+            ctx,
+            playerScreenX,
+            player.y,
+            player.direction,
+            player.animState,
+            player.animFrame,
+            player.invincibleTimer > 0,
+            player.hurtTimer
+          );
         }
       }
 

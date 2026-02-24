@@ -52,6 +52,7 @@ export interface Gimmick {
   activated: boolean;
   animFrame: number;
   cooldown: number; // frames until gimmick can be re-triggered after closing modal
+  bgmUrl?: string;
 }
 
 export interface Bullet {
@@ -112,6 +113,7 @@ export interface GameState {
   selectedChar: "toshi" | "yuichi" | "ramirez" | "yuj" | "mirko" | null;
   bulletIdCounter: number;
   particleIdCounter: number;
+  currentBgm: string | null;
 }
 
 const CANVAS_WIDTH = 800;
@@ -127,57 +129,496 @@ function createInitialState(): GameState {
     // Ground
     { x: 0, y: GROUND_Y, width: WORLD_WIDTH, height: 80, type: "ground" },
     // Section 1 platforms
-    { x: 150, y: GROUND_Y - 80, width: 120, height: 20, type: "platform", color: "#1565c0" },
-    { x: 320, y: GROUND_Y - 140, width: 100, height: 20, type: "platform", color: "#1565c0" },
-    { x: 480, y: GROUND_Y - 100, width: 80, height: 20, type: "platform", color: "#1565c0" },
-    { x: 600, y: GROUND_Y - 160, width: 120, height: 20, type: "platform", color: "#1565c0" },
+    {
+      x: 150,
+      y: GROUND_Y - 80,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#1565c0",
+    },
+    {
+      x: 320,
+      y: GROUND_Y - 140,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#1565c0",
+    },
+    {
+      x: 480,
+      y: GROUND_Y - 100,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#1565c0",
+    },
+    {
+      x: 600,
+      y: GROUND_Y - 160,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#1565c0",
+    },
     // Section 2 platforms (Profile)
-    { x: 800, y: GROUND_Y - 100, width: 100, height: 20, type: "platform", color: "#00838f" },
-    { x: 950, y: GROUND_Y - 160, width: 80, height: 20, type: "platform", color: "#00838f" },
-    { x: 1100, y: GROUND_Y - 120, width: 120, height: 20, type: "platform", color: "#00838f" },
+    {
+      x: 800,
+      y: GROUND_Y - 100,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#00838f",
+    },
+    {
+      x: 950,
+      y: GROUND_Y - 160,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#00838f",
+    },
+    {
+      x: 1100,
+      y: GROUND_Y - 120,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#00838f",
+    },
     // Section 3 platforms (Discography)
-    { x: 1600, y: GROUND_Y - 120, width: 100, height: 20, type: "platform", color: "#6a1b9a" },
-    { x: 1780, y: GROUND_Y - 180, width: 80, height: 20, type: "platform", color: "#6a1b9a" },
-    { x: 1950, y: GROUND_Y - 140, width: 120, height: 20, type: "platform", color: "#6a1b9a" },
-    { x: 2150, y: GROUND_Y - 100, width: 100, height: 20, type: "platform", color: "#6a1b9a" },
-    { x: 2300, y: GROUND_Y - 160, width: 80, height: 20, type: "platform", color: "#6a1b9a" },
+    {
+      x: 1600,
+      y: GROUND_Y - 120,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#6a1b9a",
+    },
+    {
+      x: 1780,
+      y: GROUND_Y - 180,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#6a1b9a",
+    },
+    {
+      x: 1950,
+      y: GROUND_Y - 140,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#6a1b9a",
+    },
+    {
+      x: 2150,
+      y: GROUND_Y - 100,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#6a1b9a",
+    },
+    {
+      x: 2300,
+      y: GROUND_Y - 160,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#6a1b9a",
+    },
     // Section 4 platforms (Live)
-    { x: 2700, y: GROUND_Y - 100, width: 100, height: 20, type: "platform", color: "#bf360c" },
-    { x: 2900, y: GROUND_Y - 160, width: 80, height: 20, type: "platform", color: "#bf360c" },
-    { x: 3100, y: GROUND_Y - 120, width: 120, height: 20, type: "platform", color: "#bf360c" },
-    { x: 3300, y: GROUND_Y - 180, width: 100, height: 20, type: "platform", color: "#bf360c" },
+    {
+      x: 2700,
+      y: GROUND_Y - 100,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#bf360c",
+    },
+    {
+      x: 2900,
+      y: GROUND_Y - 160,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#bf360c",
+    },
+    {
+      x: 3100,
+      y: GROUND_Y - 120,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#bf360c",
+    },
+    {
+      x: 3300,
+      y: GROUND_Y - 180,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#bf360c",
+    },
     // Final section platforms
-    { x: 3800, y: GROUND_Y - 120, width: 100, height: 20, type: "platform", color: "#880e4f" },
-    { x: 4000, y: GROUND_Y - 180, width: 80, height: 20, type: "platform", color: "#880e4f" },
-    { x: 4200, y: GROUND_Y - 140, width: 120, height: 20, type: "platform", color: "#880e4f" },
-    { x: 4400, y: GROUND_Y - 100, width: 100, height: 20, type: "platform", color: "#880e4f" },
+    {
+      x: 3800,
+      y: GROUND_Y - 120,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#880e4f",
+    },
+    {
+      x: 4000,
+      y: GROUND_Y - 180,
+      width: 80,
+      height: 20,
+      type: "platform",
+      color: "#880e4f",
+    },
+    {
+      x: 4200,
+      y: GROUND_Y - 140,
+      width: 120,
+      height: 20,
+      type: "platform",
+      color: "#880e4f",
+    },
+    {
+      x: 4400,
+      y: GROUND_Y - 100,
+      width: 100,
+      height: 20,
+      type: "platform",
+      color: "#880e4f",
+    },
   ];
 
   const enemies: Enemy[] = [
     // Section 1 enemies
-    { id: "e1", x: 200, y: GROUND_Y - 40, width: 32, height: 32, vx: 1.5, vy: 0, hp: 2, maxHp: 2, type: "robot", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 150, patrolEnd: 400, alive: true, flashTimer: 0 },
-    { id: "e2", x: 450, y: GROUND_Y - 100, width: 28, height: 28, vx: 1.5, vy: 0, hp: 2, maxHp: 2, type: "bat", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 400, patrolEnd: 650, alive: true, flashTimer: 0 },
+    {
+      id: "e1",
+      x: 200,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 1.5,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "robot",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 150,
+      patrolEnd: 400,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e2",
+      x: 450,
+      y: GROUND_Y - 100,
+      width: 28,
+      height: 28,
+      vx: 1.5,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "bat",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 400,
+      patrolEnd: 650,
+      alive: true,
+      flashTimer: 0,
+    },
     // Section 2 enemies (Profile)
-    { id: "e3", x: 750, y: GROUND_Y - 40, width: 32, height: 32, vx: 1.5, vy: 0, hp: 3, maxHp: 3, type: "robot", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 700, patrolEnd: 950, alive: true, flashTimer: 0 },
-    { id: "e4", x: 1050, y: GROUND_Y - 40, width: 32, height: 32, vx: -1.5, vy: 0, hp: 2, maxHp: 2, type: "bat", direction: -1, animFrame: 0, animTimer: 0, patrolStart: 950, patrolEnd: 1200, alive: true, flashTimer: 0 },
-    { id: "e5", x: 1200, y: GROUND_Y - 40, width: 32, height: 32, vx: 1.5, vy: 0, hp: 2, maxHp: 2, type: "skull", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 1150, patrolEnd: 1400, alive: true, flashTimer: 0 },
+    {
+      id: "e3",
+      x: 750,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 1.5,
+      vy: 0,
+      hp: 3,
+      maxHp: 3,
+      type: "robot",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 700,
+      patrolEnd: 950,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e4",
+      x: 1050,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: -1.5,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "bat",
+      direction: -1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 950,
+      patrolEnd: 1200,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e5",
+      x: 1200,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 1.5,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "skull",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 1150,
+      patrolEnd: 1400,
+      alive: true,
+      flashTimer: 0,
+    },
     // Section 3 enemies (Discography)
-    { id: "e6", x: 1600, y: GROUND_Y - 40, width: 32, height: 32, vx: 2, vy: 0, hp: 3, maxHp: 3, type: "robot", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 1550, patrolEnd: 1800, alive: true, flashTimer: 0 },
-    { id: "e7", x: 1900, y: GROUND_Y - 40, width: 32, height: 32, vx: -2, vy: 0, hp: 2, maxHp: 2, type: "skull", direction: -1, animFrame: 0, animTimer: 0, patrolStart: 1800, patrolEnd: 2100, alive: true, flashTimer: 0 },
-    { id: "e8", x: 2150, y: GROUND_Y - 40, width: 32, height: 32, vx: 1.5, vy: 0, hp: 3, maxHp: 3, type: "bat", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 2100, patrolEnd: 2400, alive: true, flashTimer: 0 },
+    {
+      id: "e6",
+      x: 1600,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 2,
+      vy: 0,
+      hp: 3,
+      maxHp: 3,
+      type: "robot",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 1550,
+      patrolEnd: 1800,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e7",
+      x: 1900,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: -2,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "skull",
+      direction: -1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 1800,
+      patrolEnd: 2100,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e8",
+      x: 2150,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 1.5,
+      vy: 0,
+      hp: 3,
+      maxHp: 3,
+      type: "bat",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 2100,
+      patrolEnd: 2400,
+      alive: true,
+      flashTimer: 0,
+    },
     // Section 4 enemies (Live)
-    { id: "e9", x: 2700, y: GROUND_Y - 40, width: 32, height: 32, vx: 2, vy: 0, hp: 3, maxHp: 3, type: "robot", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 2650, patrolEnd: 2900, alive: true, flashTimer: 0 },
-    { id: "e10", x: 2950, y: GROUND_Y - 40, width: 32, height: 32, vx: -2, vy: 0, hp: 3, maxHp: 3, type: "skull", direction: -1, animFrame: 0, animTimer: 0, patrolStart: 2900, patrolEnd: 3200, alive: true, flashTimer: 0 },
-    { id: "e11", x: 3250, y: GROUND_Y - 40, width: 32, height: 32, vx: 2, vy: 0, hp: 2, maxHp: 2, type: "bat", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 3200, patrolEnd: 3500, alive: true, flashTimer: 0 },
+    {
+      id: "e9",
+      x: 2700,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 2,
+      vy: 0,
+      hp: 3,
+      maxHp: 3,
+      type: "robot",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 2650,
+      patrolEnd: 2900,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e10",
+      x: 2950,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: -2,
+      vy: 0,
+      hp: 3,
+      maxHp: 3,
+      type: "skull",
+      direction: -1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 2900,
+      patrolEnd: 3200,
+      alive: true,
+      flashTimer: 0,
+    },
+    {
+      id: "e11",
+      x: 3250,
+      y: GROUND_Y - 40,
+      width: 32,
+      height: 32,
+      vx: 2,
+      vy: 0,
+      hp: 2,
+      maxHp: 2,
+      type: "bat",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 3200,
+      patrolEnd: 3500,
+      alive: true,
+      flashTimer: 0,
+    },
     // Final boss area
-    { id: "boss1", x: 4500, y: GROUND_Y - 64, width: 64, height: 64, vx: 2, vy: 0, hp: 10, maxHp: 10, type: "boss", direction: 1, animFrame: 0, animTimer: 0, patrolStart: 4400, patrolEnd: 4800, alive: true, flashTimer: 0 },
+    {
+      id: "boss1",
+      x: 4500,
+      y: GROUND_Y - 64,
+      width: 64,
+      height: 64,
+      vx: 2,
+      vy: 0,
+      hp: 10,
+      maxHp: 10,
+      type: "boss",
+      direction: 1,
+      animFrame: 0,
+      animTimer: 0,
+      patrolStart: 4400,
+      patrolEnd: 4800,
+      alive: true,
+      flashTimer: 0,
+    },
   ];
 
   const gimmicks: Gimmick[] = [
-    { id: "profile", x: 1280, y: GROUND_Y - 80, width: 48, height: 80, type: "profile", label: "PROFILE", activated: false, animFrame: 0, cooldown: 0 },
-    { id: "discography", x: 2450, y: GROUND_Y - 80, width: 48, height: 80, type: "discography", label: "DISCOGRAPHY", activated: false, animFrame: 0, cooldown: 0 },
-    { id: "live", x: 3550, y: GROUND_Y - 80, width: 48, height: 80, type: "live", label: "LIVE", activated: false, animFrame: 0, cooldown: 0 },
-    { id: "info", x: 4850, y: GROUND_Y - 80, width: 48, height: 80, type: "info", label: "CONTACT", activated: false, animFrame: 0, cooldown: 0 },
+    {
+      id: "bgm1",
+      x: 420,
+      y: GROUND_Y - 48,
+      width: 32,
+      height: 32,
+      type: "music_note",
+      label: "BGM",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+      bgmUrl: "/thelastone_8bit.mp3",
+    },
+    {
+      id: "bgm2",
+      x: 1850,
+      y: GROUND_Y - 48,
+      width: 32,
+      height: 32,
+      type: "music_note",
+      label: "BGM",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+      bgmUrl: "/pathofdeath_8bit.mp3",
+    },
+    {
+      id: "bgm3",
+      x: 3100,
+      y: GROUND_Y - 48,
+      width: 32,
+      height: 32,
+      type: "music_note",
+      label: "BGM",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+      bgmUrl: "/bottleneck_8bit.mp3",
+    },
+    {
+      id: "profile",
+      x: 1280,
+      y: GROUND_Y - 80,
+      width: 48,
+      height: 80,
+      type: "profile",
+      label: "PROFILE",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+    },
+    {
+      id: "discography",
+      x: 2450,
+      y: GROUND_Y - 80,
+      width: 48,
+      height: 80,
+      type: "discography",
+      label: "DISCOGRAPHY",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+    },
+    {
+      id: "live",
+      x: 3550,
+      y: GROUND_Y - 80,
+      width: 48,
+      height: 80,
+      type: "live",
+      label: "LIVE",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+    },
+    {
+      id: "info",
+      x: 4850,
+      y: GROUND_Y - 80,
+      width: 48,
+      height: 80,
+      type: "info",
+      label: "CONTACT",
+      activated: false,
+      animFrame: 0,
+      cooldown: 0,
+    },
   ];
 
   return {
@@ -214,10 +655,13 @@ function createInitialState(): GameState {
     selectedChar: null,
     bulletIdCounter: 0,
     particleIdCounter: 0,
+    currentBgm: null,
   };
 }
 
-export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
+export function useGameEngine(
+  canvasRef: React.RefObject<HTMLCanvasElement | null>
+) {
   // All refs - never cause re-renders
   const stateRef = useRef<GameState>(createInitialState());
   const keysRef = useRef<Set<string>>(new Set());
@@ -227,28 +671,35 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
 
   // React state - only for UI rendering
   const [modalContent, setModalContent] = useState<string | null>(null);
-  const [gamePhase, setGamePhase] = useState<"title" | "charSelect" | "playing" | "modal">("title");
+  const [gamePhase, setGamePhase] = useState<
+    "title" | "charSelect" | "playing" | "modal"
+  >("title");
   const [playerHp, setPlayerHp] = useState(28);
   const [score, setScore] = useState(0);
+  const [currentBgm, setCurrentBgm] = useState<string | null>(null);
 
   // --- Game logic functions (no hooks inside) ---
 
-  const spawnParticles = useCallback((state: GameState, x: number, y: number, color: string, count: number) => {
-    for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-      const speed = 2 + Math.random() * 3;
-      state.particles.push({
-        id: `p_${state.particleIdCounter++}`,
-        x, y,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 2,
-        life: 30 + Math.random() * 20,
-        maxLife: 50,
-        color,
-        size: 3 + Math.random() * 4,
-      });
-    }
-  }, []);
+  const spawnParticles = useCallback(
+    (state: GameState, x: number, y: number, color: string, count: number) => {
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
+        const speed = 2 + Math.random() * 3;
+        state.particles.push({
+          id: `p_${state.particleIdCounter++}`,
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 2,
+          life: 30 + Math.random() * 20,
+          maxLife: 50,
+          color,
+          size: 3 + Math.random() * 4,
+        });
+      }
+    },
+    []
+  );
 
   const shoot = useCallback((state: GameState) => {
     if (state.player.shootCooldown > 0) return;
@@ -273,7 +724,11 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
         justPressedRef.current.add(e.code);
       }
       keysRef.current.add(e.code);
-      if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(e.code)) {
+      if (
+        ["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(
+          e.code
+        )
+      ) {
         e.preventDefault();
       }
     };
@@ -309,15 +764,28 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
         // Input
         const left = keys.has("ArrowLeft") || keys.has("KeyA");
         const right = keys.has("ArrowRight") || keys.has("KeyD");
-        const jumpJustPressed = justPressed.has("ArrowUp") || justPressed.has("KeyW") || justPressed.has("Space");
-        const shootJustPressed = justPressed.has("KeyZ") || justPressed.has("KeyX") || justPressed.has("KeyJ");
-        const shootHeld = keys.has("KeyZ") || keys.has("KeyX") || keys.has("KeyJ");
+        const jumpJustPressed =
+          justPressed.has("ArrowUp") ||
+          justPressed.has("KeyW") ||
+          justPressed.has("Space");
+        const shootJustPressed =
+          justPressed.has("KeyZ") ||
+          justPressed.has("KeyX") ||
+          justPressed.has("KeyJ");
+        const shootHeld =
+          keys.has("KeyZ") || keys.has("KeyX") || keys.has("KeyJ");
         const shootReleased = !shootHeld && player.charging;
 
         // Movement
-        if (left) { player.vx = -MOVE_SPEED; player.direction = -1; }
-        else if (right) { player.vx = MOVE_SPEED; player.direction = 1; }
-        else { player.vx *= 0.7; }
+        if (left) {
+          player.vx = -MOVE_SPEED;
+          player.direction = -1;
+        } else if (right) {
+          player.vx = MOVE_SPEED;
+          player.direction = 1;
+        } else {
+          player.vx *= 0.7;
+        }
 
         if (jumpJustPressed && player.onGround) {
           player.vy = JUMP_FORCE;
@@ -338,7 +806,8 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
               const angle = Math.random() * Math.PI * 2;
               const radius = 25 + Math.random() * 15;
               const px = player.x + player.width / 2 + Math.cos(angle) * radius;
-              const py = player.y + player.height / 2 + Math.sin(angle) * radius;
+              const py =
+                player.y + player.height / 2 + Math.sin(angle) * radius;
 
               // vx and vy aimed back towards player center
               const speed = 1.5 + Math.random() * 2;
@@ -349,16 +818,22 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
 
               state.particles.push({
                 id: `p_${state.particleIdCounter++}`,
-                x: px, y: py,
-                vx, vy,
-                life: 15, maxLife: 15,
+                x: px,
+                y: py,
+                vx,
+                vy,
+                life: 15,
+                maxLife: 15,
                 color: isMaxCharge ? "#00e5ff" : "#ffffff44",
                 size: isMaxCharge ? 3 : 2,
               });
             }
           }
 
-          if (player.chargePower > 60 && Math.floor(Date.now() / 50) % 2 === 0) {
+          if (
+            player.chargePower > 60 &&
+            Math.floor(Date.now() / 50) % 2 === 0
+          ) {
             // charging visual effect
             player.animState = "shoot";
           }
@@ -393,7 +868,8 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
 
         // World bounds
         if (player.x < 0) player.x = 0;
-        if (player.x > state.worldWidth - player.width) player.x = state.worldWidth - player.width;
+        if (player.x > state.worldWidth - player.width)
+          player.x = state.worldWidth - player.width;
 
         // Platform collision
         player.onGround = false;
@@ -422,9 +898,14 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
             const angle = (Math.PI * 2 * i) / 8;
             state.particles.push({
               id: `p_${state.particleIdCounter++}`,
-              x: player.x + player.width / 2, y: player.y,
-              vx: Math.cos(angle) * 3, vy: Math.sin(angle) * 3 - 2,
-              life: 40, maxLife: 40, color: "#ff4444", size: 4,
+              x: player.x + player.width / 2,
+              y: player.y,
+              vx: Math.cos(angle) * 3,
+              vy: Math.sin(angle) * 3 - 2,
+              life: 40,
+              maxLife: 40,
+              color: "#ff4444",
+              size: 4,
             });
           }
         }
@@ -435,15 +916,20 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
         player.hurtTimer = Math.max(0, player.hurtTimer - 1);
         player.invincibleTimer = Math.max(0, player.invincibleTimer - 1);
 
-        if (player.hurtTimer > 0) { player.animState = "hurt"; }
-        else if (!player.onGround) { player.animState = "jump"; }
-        else if (player.shootCooldown > 6) { player.animState = "shoot"; }
-        else if (Math.abs(player.vx) > 0.5) {
+        if (player.hurtTimer > 0) {
+          player.animState = "hurt";
+        } else if (!player.onGround) {
+          player.animState = "jump";
+        } else if (player.shootCooldown > 6) {
+          player.animState = "shoot";
+        } else if (Math.abs(player.vx) > 0.5) {
           player.animState = "run";
-          if (player.animTimer % 8 === 0) player.animFrame = (player.animFrame + 1) % 4;
+          if (player.animTimer % 8 === 0)
+            player.animFrame = (player.animFrame + 1) % 4;
         } else {
           player.animState = "idle";
-          if (player.animTimer % 20 === 0) player.animFrame = (player.animFrame + 1) % 2;
+          if (player.animTimer % 20 === 0)
+            player.animFrame = (player.animFrame + 1) % 2;
         }
 
         // Update bullets
@@ -451,7 +937,10 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
           if (!bullet.alive) continue;
           bullet.x += bullet.vx;
           bullet.y += bullet.vy;
-          if (bullet.x < state.cameraX - 50 || bullet.x > state.cameraX + CANVAS_WIDTH + 50) {
+          if (
+            bullet.x < state.cameraX - 50 ||
+            bullet.x > state.cameraX + CANVAS_WIDTH + 50
+          ) {
             bullet.alive = false;
           }
         }
@@ -471,7 +960,8 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
               enemy.vx *= -1;
               enemy.direction = enemy.vx > 0 ? 1 : -1;
             }
-            if (enemy.animTimer % 10 === 0) enemy.animFrame = (enemy.animFrame + 1) % 2;
+            if (enemy.animTimer % 10 === 0)
+              enemy.animFrame = (enemy.animFrame + 1) % 2;
           } else if (enemy.type === "boss") {
             enemy.animTimer++;
             enemy.x += enemy.vx;
@@ -481,11 +971,18 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
             }
             for (const plat of state.platforms) {
               if (
-                enemy.x + enemy.width > plat.x && enemy.x < plat.x + plat.width &&
-                enemy.y + enemy.height > plat.y && enemy.y + enemy.height < plat.y + plat.height + 16 && enemy.vy >= 0
-              ) { enemy.y = plat.y - enemy.height; enemy.vy = 0; }
+                enemy.x + enemy.width > plat.x &&
+                enemy.x < plat.x + plat.width &&
+                enemy.y + enemy.height > plat.y &&
+                enemy.y + enemy.height < plat.y + plat.height + 16 &&
+                enemy.vy >= 0
+              ) {
+                enemy.y = plat.y - enemy.height;
+                enemy.vy = 0;
+              }
             }
-            if (enemy.animTimer % 8 === 0) enemy.animFrame = (enemy.animFrame + 1) % 4;
+            if (enemy.animTimer % 8 === 0)
+              enemy.animFrame = (enemy.animFrame + 1) % 4;
           } else {
             enemy.animTimer++;
             enemy.x += enemy.vx;
@@ -498,19 +995,28 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
             enemy.y += enemy.vy;
             for (const plat of state.platforms) {
               if (
-                enemy.x + enemy.width > plat.x && enemy.x < plat.x + plat.width &&
-                enemy.y + enemy.height > plat.y && enemy.y + enemy.height < plat.y + plat.height + 16 && enemy.vy >= 0
-              ) { enemy.y = plat.y - enemy.height; enemy.vy = 0; }
+                enemy.x + enemy.width > plat.x &&
+                enemy.x < plat.x + plat.width &&
+                enemy.y + enemy.height > plat.y &&
+                enemy.y + enemy.height < plat.y + plat.height + 16 &&
+                enemy.vy >= 0
+              ) {
+                enemy.y = plat.y - enemy.height;
+                enemy.vy = 0;
+              }
             }
-            if (enemy.animTimer % 12 === 0) enemy.animFrame = (enemy.animFrame + 1) % 2;
+            if (enemy.animTimer % 12 === 0)
+              enemy.animFrame = (enemy.animFrame + 1) % 2;
           }
 
           // Bullet vs enemy collision
           for (const bullet of state.bullets) {
             if (!bullet.alive) continue;
             if (
-              bullet.x > enemy.x && bullet.x < enemy.x + enemy.width &&
-              bullet.y > enemy.y && bullet.y < enemy.y + enemy.height
+              bullet.x > enemy.x &&
+              bullet.x < enemy.x + enemy.width &&
+              bullet.y > enemy.y &&
+              bullet.y < enemy.y + enemy.height
             ) {
               const damage = bullet.isCharged ? 3 : 1;
               if (!bullet.isCharged) {
@@ -525,9 +1031,14 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
                 const angle = (Math.PI * 2 * i) / (bullet.isCharged ? 8 : 4);
                 state.particles.push({
                   id: `p_${state.particleIdCounter++}`,
-                  x: enemy.x + enemy.width / 2, y: enemy.y + enemy.height / 2,
-                  vx: Math.cos(angle) * 3, vy: Math.sin(angle) * 3 - 2,
-                  life: 25, maxLife: 25, color: bullet.isCharged ? "#00e5ff" : "#ffdd00", size: bullet.isCharged ? 5 : 3,
+                  x: enemy.x + enemy.width / 2,
+                  y: enemy.y + enemy.height / 2,
+                  vx: Math.cos(angle) * 3,
+                  vy: Math.sin(angle) * 3 - 2,
+                  life: 25,
+                  maxLife: 25,
+                  color: bullet.isCharged ? "#00e5ff" : "#ffdd00",
+                  size: bullet.isCharged ? 5 : 3,
                 });
               }
               if (enemy.hp <= 0) {
@@ -537,9 +1048,14 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
                   const angle = (Math.PI * 2 * i) / 12;
                   state.particles.push({
                     id: `p_${state.particleIdCounter++}`,
-                    x: enemy.x + enemy.width / 2, y: enemy.y + enemy.height / 2,
-                    vx: Math.cos(angle) * 4, vy: Math.sin(angle) * 4 - 2,
-                    life: 40, maxLife: 40, color: "#ff6600", size: 5,
+                    x: enemy.x + enemy.width / 2,
+                    y: enemy.y + enemy.height / 2,
+                    vx: Math.cos(angle) * 4,
+                    vy: Math.sin(angle) * 4 - 2,
+                    life: 40,
+                    maxLife: 40,
+                    color: "#ff6600",
+                    size: 5,
                   });
                 }
               }
@@ -554,7 +1070,10 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
             player.y + player.height - 8 > enemy.y &&
             player.y + 8 < enemy.y + enemy.height
           ) {
-            player.hp = Math.max(0, player.hp - (enemy.type === "boss" ? 4 : 2));
+            player.hp = Math.max(
+              0,
+              player.hp - (enemy.type === "boss" ? 4 : 2)
+            );
             player.invincibleTimer = 60;
             player.hurtTimer = 20;
             player.vy = -6;
@@ -563,9 +1082,14 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
               const angle = (Math.PI * 2 * i) / 6;
               state.particles.push({
                 id: `p_${state.particleIdCounter++}`,
-                x: player.x + player.width / 2, y: player.y + player.height / 2,
-                vx: Math.cos(angle) * 3, vy: Math.sin(angle) * 3 - 2,
-                life: 30, maxLife: 30, color: "#ff0000", size: 4,
+                x: player.x + player.width / 2,
+                y: player.y + player.height / 2,
+                vx: Math.cos(angle) * 3,
+                vy: Math.sin(angle) * 3 - 2,
+                life: 30,
+                maxLife: 30,
+                color: "#ff0000",
+                size: 4,
               });
             }
           }
@@ -590,15 +1114,25 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
             player.y < gimmick.y + gimmick.height
           ) {
             gimmick.activated = true;
-            state.activeModal = gimmick.type;
-            state.gamePhase = "modal";
+            if (gimmick.type === "music_note") {
+              state.currentBgm = gimmick.bgmUrl || null;
+              gimmick.cooldown = 120; // 2 seconds cooldown
+            } else {
+              state.activeModal = gimmick.type;
+              state.gamePhase = "modal";
+            }
             for (let i = 0; i < 16; i++) {
               const angle = (Math.PI * 2 * i) / 16;
               state.particles.push({
                 id: `p_${state.particleIdCounter++}`,
-                x: gimmick.x + gimmick.width / 2, y: gimmick.y,
-                vx: Math.cos(angle) * 4, vy: Math.sin(angle) * 4 - 2,
-                life: 40, maxLife: 40, color: "#00ffcc", size: 4,
+                x: gimmick.x + gimmick.width / 2,
+                y: gimmick.y,
+                vx: Math.cos(angle) * 4,
+                vy: Math.sin(angle) * 4 - 2,
+                life: 40,
+                maxLife: 40,
+                color: "#00ffcc",
+                size: 4,
               });
             }
           }
@@ -608,7 +1142,8 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
         for (const p of state.particles) {
           p.x += p.vx;
           p.y += p.vy;
-          if (p.maxLife !== 15) { // Life 15 is used for charging inward particles
+          if (p.maxLife !== 15) {
+            // Life 15 is used for charging inward particles
             p.vy += 0.15; // Gravity for normal particles
           }
           p.life--;
@@ -618,7 +1153,10 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
         // Camera follow
         const targetCamX = player.x - CANVAS_WIDTH / 3;
         state.cameraX += (targetCamX - state.cameraX) * 0.1;
-        state.cameraX = Math.max(0, Math.min(state.worldWidth - CANVAS_WIDTH, state.cameraX));
+        state.cameraX = Math.max(
+          0,
+          Math.min(state.worldWidth - CANVAS_WIDTH, state.cameraX)
+        );
       }
 
       // Clear justPressed after each frame
@@ -627,11 +1165,16 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
       // Sync React state only when changed
       const newPhase = state.gamePhase;
       const newModal = state.activeModal;
+      const newBgm = state.currentBgm;
       if (newPhase !== prevPhase || newModal !== prevModal) {
         prevPhase = newPhase;
         prevModal = newModal;
         setGamePhase(newPhase);
         setModalContent(newModal);
+      }
+
+      if (newBgm) {
+        setCurrentBgm(newBgm);
       }
 
       // Sync HP/score periodically
@@ -654,11 +1197,14 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
     setGamePhase("charSelect");
   }, []);
 
-  const selectCharacter = useCallback((charId: "toshi" | "yuichi" | "ramirez" | "yuj" | "mirko") => {
-    stateRef.current.selectedChar = charId;
-    stateRef.current.gamePhase = "playing";
-    setGamePhase("playing");
-  }, []);
+  const selectCharacter = useCallback(
+    (charId: "toshi" | "yuichi" | "ramirez" | "yuj" | "mirko") => {
+      stateRef.current.selectedChar = charId;
+      stateRef.current.gamePhase = "playing";
+      setGamePhase("playing");
+    },
+    []
+  );
 
   const startGame = useCallback(() => {
     stateRef.current.gamePhase = "playing";
@@ -716,6 +1262,7 @@ export function useGameEngine(canvasRef: React.RefObject<HTMLCanvasElement | nul
     stateRef,
     gamePhase,
     modalContent,
+    currentBgm,
     playerHp,
     maxHp: 28,
     score,

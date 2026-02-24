@@ -1,4 +1,12 @@
-import { boolean, int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import {
+  boolean,
+  int,
+  mysqlEnum,
+  mysqlTable,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -55,7 +63,9 @@ export const discography = mysqlTable("discography", {
   title: varchar("title", { length: 255 }).notNull(),
   releaseYear: int("releaseYear").notNull(),
   releaseDate: varchar("releaseDate", { length: 20 }),
-  type: mysqlEnum("type", ["single", "ep", "album", "mini_album"]).default("single").notNull(),
+  type: mysqlEnum("type", ["single", "ep", "album", "mini_album"])
+    .default("single")
+    .notNull(),
   streamingUrl: text("streamingUrl"),
   downloadUrl: text("downloadUrl"),
   coverImageUrl: text("coverImageUrl"),
