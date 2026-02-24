@@ -185,7 +185,7 @@ export function MobileControls({ onLeft, onRight, onJump, onShoot, onLeftEnd, on
     <div
       className="absolute bottom-0 left-0 right-0 pointer-events-auto"
       style={{
-        padding: "12px 16px",
+        padding: "12px 16px 36px 16px",
         background: "linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)",
         zIndex: 20,
         display: "flex",
