@@ -13,22 +13,57 @@ interface GameModalProps {
   onClose: () => void;
 }
 
-function PixelBorder({ children, color = "#00e5ff" }: { children: React.ReactNode; color?: string }) {
+function PixelBorder({
+  children,
+  color = "#00e5ff",
+}: {
+  children: React.ReactNode;
+  color?: string;
+}) {
   return (
     <div
       className="relative"
       style={{
         border: `3px solid ${color}`,
         boxShadow: `0 0 20px ${color}44, inset 0 0 20px ${color}11, 0 0 60px ${color}22`,
-        background: "linear-gradient(135deg, #0a0a2e 0%, #0d0d3a 50%, #0a0a2e 100%)",
+        background:
+          "linear-gradient(135deg, #0a0a2e 0%, #0d0d3a 50%, #0a0a2e 100%)",
         imageRendering: "pixelated",
       }}
     >
       {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-4 h-4" style={{ borderRight: `3px solid ${color}`, borderBottom: `3px solid ${color}`, background: color }} />
-      <div className="absolute top-0 right-0 w-4 h-4" style={{ borderLeft: `3px solid ${color}`, borderBottom: `3px solid ${color}`, background: color }} />
-      <div className="absolute bottom-0 left-0 w-4 h-4" style={{ borderRight: `3px solid ${color}`, borderTop: `3px solid ${color}`, background: color }} />
-      <div className="absolute bottom-0 right-0 w-4 h-4" style={{ borderLeft: `3px solid ${color}`, borderTop: `3px solid ${color}`, background: color }} />
+      <div
+        className="absolute top-0 left-0 w-4 h-4"
+        style={{
+          borderRight: `3px solid ${color}`,
+          borderBottom: `3px solid ${color}`,
+          background: color,
+        }}
+      />
+      <div
+        className="absolute top-0 right-0 w-4 h-4"
+        style={{
+          borderLeft: `3px solid ${color}`,
+          borderBottom: `3px solid ${color}`,
+          background: color,
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-4 h-4"
+        style={{
+          borderRight: `3px solid ${color}`,
+          borderTop: `3px solid ${color}`,
+          background: color,
+        }}
+      />
+      <div
+        className="absolute bottom-0 right-0 w-4 h-4"
+        style={{
+          borderLeft: `3px solid ${color}`,
+          borderTop: `3px solid ${color}`,
+          background: color,
+        }}
+      />
       {children}
     </div>
   );
@@ -36,14 +71,46 @@ function PixelBorder({ children, color = "#00e5ff" }: { children: React.ReactNod
 
 function ProfileModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 50);
+  }, []);
 
   const members = [
-    { name: "Toshi", role: "Vo.", color: "#ff6d00", desc: "バンドの顔。激しいシャウトと繊細なメロディを使い分けるフロントマン。", img: "/toshi.png" },
-    { name: "Yuichi", role: "Gt.", color: "#00e5ff", desc: "歪んだリフと泣きのソロで楽曲に魂を吹き込む。", img: "/yuichi.png" },
-    { name: "Ramirez", role: "Gt./Cho.", color: "#e040fb", desc: "コーラスとギターを兼任。ハーモニーとリフでサウンドに厚みを加える。", img: "/ramirez.png" },
-    { name: "Yuj", role: "Ba./Cho.", color: "#aa00ff", desc: "重厚なグルーヴとコーラスでバンドサウンドの土台を支える。", img: "/yuj.png" },
-    { name: "Mirko", role: "Dr.", color: "#ff1744", desc: "手数の多いドラミングでライブを爆発的に盛り上げる。", img: "/mirko.png" },
+    {
+      name: "Toshi",
+      role: "Vo.",
+      color: "#ff6d00",
+      desc: "バンドの顔。激しいシャウトと繊細なメロディを使い分けるフロントマン。",
+      img: "/toshi.png",
+    },
+    {
+      name: "Yuichi",
+      role: "Gt.",
+      color: "#00e5ff",
+      desc: "歪んだリフと泣きのソロで楽曲に魂を吹き込む。",
+      img: "/yuichi.png",
+    },
+    {
+      name: "Ramirez",
+      role: "Gt./Cho.",
+      color: "#e040fb",
+      desc: "コーラスとギターを兼任。ハーモニーとリフでサウンドに厚みを加える。",
+      img: "/ramirez.png",
+    },
+    {
+      name: "Yuj",
+      role: "Ba./Cho.",
+      color: "#aa00ff",
+      desc: "重厚なグルーヴとコーラスでバンドサウンドの土台を支える。",
+      img: "/yuj.png",
+    },
+    {
+      name: "Mirko",
+      role: "Dr.",
+      color: "#ff1744",
+      desc: "手数の多いドラミングでライブを爆発的に盛り上げる。",
+      img: "/mirko.png",
+    },
   ];
 
   return (
@@ -54,7 +121,9 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
         opacity: visible ? 1 : 0,
         transition: "opacity 0.3s",
       }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       {/* Fixed close button - always visible top-right */}
       <button
@@ -83,7 +152,10 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
       </button>
       <div style={{ maxWidth: 680, width: "100%" }}>
         <PixelBorder color="#00e5ff">
-          <div className="p-6">
+          <div
+            className="p-6"
+            style={{ maxHeight: "85dvh", overflowY: "auto" }}
+          >
             {/* Header */}
             <div className="text-center mb-6">
               <div
@@ -98,7 +170,13 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
               >
                 ★ PROFILE ★
               </div>
-              <div style={{ color: "#ffffff88", fontFamily: "'Press Start 2P', monospace", fontSize: "8px" }}>
+              <div
+                style={{
+                  color: "#ffffff88",
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "8px",
+                }}
+              >
                 STAGE CLEAR! MEMBER DATA UNLOCKED
               </div>
             </div>
@@ -115,8 +193,17 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
                 lineHeight: "1.8",
               }}
             >
-              <span style={{ color: "#00e5ff", fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}>SENSE OF DEFEAT</span>
-              <br /><br />
+              <span
+                style={{
+                  color: "#00e5ff",
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "10px",
+                }}
+              >
+                SENSE OF DEFEAT
+              </span>
+              <br />
+              <br />
               2016年の結成以来、地元・熊谷や都内を中心に精力的に活動中。
               テクニカルなギターリフと、エモーショナルで疾走感あふれるメロディを武器にした、独自のメタルコアサウンドを構築。
             </div>
@@ -131,20 +218,65 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
                     border: `2px solid ${m.color}44`,
                     background: `${m.color}0a`,
                     // Last item spans full width if odd total
-                    gridColumn: i === members.length - 1 && members.length % 2 !== 0 ? "1 / -1" : undefined,
+                    gridColumn:
+                      i === members.length - 1 && members.length % 2 !== 0
+                        ? "1 / -1"
+                        : undefined,
                   }}
                 >
-                  <div style={{ flexShrink: 0, width: "70px", height: "90px", display: "flex", justifyContent: "center", alignItems: "flex-end", background: "rgba(0,0,0,0.5)", border: `1px solid ${m.color}66`, borderRadius: "4px" }}>
-                    <img src={m.img} alt={m.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", imageRendering: "pixelated" }} />
+                  <div
+                    style={{
+                      flexShrink: 0,
+                      width: "70px",
+                      height: "90px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "flex-end",
+                      background: "rgba(0,0,0,0.5)",
+                      border: `1px solid ${m.color}66`,
+                      borderRadius: "4px",
+                    }}
+                  >
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      style={{
+                        maxWidth: "100%",
+                        maxHeight: "100%",
+                        objectFit: "contain",
+                        imageRendering: "pixelated",
+                      }}
+                    />
                   </div>
                   <div>
-                    <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "8px", color: m.color, marginBottom: "4px" }}>
+                    <div
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "8px",
+                        color: m.color,
+                        marginBottom: "4px",
+                      }}
+                    >
                       {m.role}
                     </div>
-                    <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "10px", color: "#ffffff", marginBottom: "6px" }}>
+                    <div
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "10px",
+                        color: "#ffffff",
+                        marginBottom: "6px",
+                      }}
+                    >
                       {m.name}
                     </div>
-                    <div style={{ fontFamily: "'Noto Sans JP', sans-serif", fontSize: "11px", color: "#aaaaaa", lineHeight: "1.6" }}>
+                    <div
+                      style={{
+                        fontFamily: "'Noto Sans JP', sans-serif",
+                        fontSize: "11px",
+                        color: "#aaaaaa",
+                        lineHeight: "1.6",
+                      }}
+                    >
                       {m.desc}
                     </div>
                   </div>
@@ -154,7 +286,7 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
 
             {/* SNS Links */}
             <div className="flex gap-3 justify-center mb-6">
-              {["X (Twitter)", "Instagram", "YouTube"].map((sns) => (
+              {["X (Twitter)", "Instagram", "YouTube"].map(sns => (
                 <button
                   key={sns}
                   className="px-3 py-2"
@@ -167,12 +299,14 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
                     cursor: "pointer",
                     transition: "all 0.1s",
                   }}
-                  onMouseEnter={(e) => {
-                    (e.target as HTMLButtonElement).style.background = "#00e5ff";
+                  onMouseEnter={e => {
+                    (e.target as HTMLButtonElement).style.background =
+                      "#00e5ff";
                     (e.target as HTMLButtonElement).style.color = "#000";
                   }}
-                  onMouseLeave={(e) => {
-                    (e.target as HTMLButtonElement).style.background = "transparent";
+                  onMouseLeave={e => {
+                    (e.target as HTMLButtonElement).style.background =
+                      "transparent";
                     (e.target as HTMLButtonElement).style.color = "#00e5ff";
                   }}
                 >
@@ -191,17 +325,27 @@ function ProfileModal({ onClose }: { onClose: () => void }) {
 
 function DiscographyModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 50);
+  }, []);
 
   const discoData = MOCK_DISCOGRAPHY;
   const discoLoading = false;
 
   // Color palette for releases (cycles through)
-  const colorPalette = ["#aa00ff", "#e040fb", "#7c4dff", "#00e5ff", "#ff6d00", "#ff1744", "#00e676"];
+  const colorPalette = [
+    "#aa00ff",
+    "#e040fb",
+    "#7c4dff",
+    "#00e5ff",
+    "#ff6d00",
+    "#ff1744",
+    "#00e676",
+  ];
 
   const releases = discoData.map((item, i) => ({
     title: item.title,
-    type: item.type.replace('_', ' ').toUpperCase(),
+    type: item.type.replace("_", " ").toUpperCase(),
     year: String(item.releaseYear),
     color: colorPalette[i % colorPalette.length],
     link: item.streamingUrl ?? item.downloadUrl ?? "",
@@ -217,7 +361,9 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
         opacity: visible ? 1 : 0,
         transition: "opacity 0.3s",
       }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <button
         onClick={onClose}
@@ -245,7 +391,10 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
       </button>
       <div style={{ maxWidth: 680, width: "100%" }}>
         <PixelBorder color="#aa00ff">
-          <div className="p-6">
+          <div
+            className="p-6"
+            style={{ maxHeight: "85dvh", overflowY: "auto" }}
+          >
             <div className="text-center mb-6">
               <div
                 style={{
@@ -259,13 +408,22 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
               >
                 ♪ DISCOGRAPHY ♪
               </div>
-              <div style={{ color: "#ffffff88", fontFamily: "'Press Start 2P', monospace", fontSize: "8px" }}>
+              <div
+                style={{
+                  color: "#ffffff88",
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "8px",
+                }}
+              >
                 ALL RELEASES UNLOCKED
               </div>
             </div>
 
-            <div className="space-y-4 mb-6" style={{ maxHeight: "340px", overflowY: "auto" }}>
-              {releases.map((r) => (
+            <div
+              className="space-y-4 mb-6"
+              style={{ maxHeight: "50dvh", overflowY: "auto" }}
+            >
+              {releases.map(r => (
                 <div
                   key={r.title}
                   className="p-4"
@@ -276,10 +434,23 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
                 >
                   <div className="flex items-start justify-between mb-3">
                     <div>
-                      <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "7px", color: r.color, marginBottom: "4px" }}>
+                      <div
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: "7px",
+                          color: r.color,
+                          marginBottom: "4px",
+                        }}
+                      >
                         {r.type} / {r.year}
                       </div>
-                      <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "12px", color: "#ffffff" }}>
+                      <div
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: "12px",
+                          color: "#ffffff",
+                        }}
+                      >
                         {r.title}
                       </div>
                     </div>
@@ -296,7 +467,12 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
                         <img
                           src={r.coverImageUrl}
                           alt={r.title}
-                          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            display: "block",
+                          }}
                         />
                       </div>
                     ) : (
@@ -312,23 +488,46 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
                           flexShrink: 0,
                         }}
                       >
-                        <div style={{ width: 20, height: 20, borderRadius: "50%", border: `3px solid ${r.color}`, position: "relative" }}>
-                          <div style={{ width: 6, height: 6, borderRadius: "50%", background: r.color, position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }} />
+                        <div
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                            border: `3px solid ${r.color}`,
+                            position: "relative",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: 6,
+                              height: 6,
+                              borderRadius: "50%",
+                              background: r.color,
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              transform: "translate(-50%,-50%)",
+                            }}
+                          />
                         </div>
                       </div>
                     )}
                   </div>
-                  {'description' in r && typeof (r as { description?: string | null }).description === 'string' && (
-                    <div style={{
-                      fontSize: "12px",
-                      color: "#aaaaaa",
-                      padding: "4px 0",
-                      marginBottom: "8px",
-                      fontFamily: "'Noto Sans JP', sans-serif",
-                    }}>
-                      {(r as { description: string }).description}
-                    </div>
-                  )}
+                  {"description" in r &&
+                    typeof (r as { description?: string | null })
+                      .description === "string" && (
+                      <div
+                        style={{
+                          fontSize: "12px",
+                          color: "#aaaaaa",
+                          padding: "4px 0",
+                          marginBottom: "8px",
+                          fontFamily: "'Noto Sans JP', sans-serif",
+                        }}
+                      >
+                        {(r as { description: string }).description}
+                      </div>
+                    )}
                   <a
                     href={r.link}
                     target="_blank"
@@ -343,13 +542,17 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
                       textDecoration: "none",
                       transition: "all 0.1s",
                     }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.background = r.color;
-                      (e.currentTarget as HTMLAnchorElement).style.color = "#000";
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLAnchorElement).style.background =
+                        r.color;
+                      (e.currentTarget as HTMLAnchorElement).style.color =
+                        "#000";
                     }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-                      (e.currentTarget as HTMLAnchorElement).style.color = r.color;
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLAnchorElement).style.background =
+                        "transparent";
+                      (e.currentTarget as HTMLAnchorElement).style.color =
+                        r.color;
                     }}
                   >
                     ▶ STREAMING / DOWNLOAD
@@ -368,18 +571,20 @@ function DiscographyModal({ onClose }: { onClose: () => void }) {
 
 function LiveModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 50);
+  }, []);
 
   const liveData = MOCK_LIVE_EVENTS;
   const liveLoading = false;
 
   // Convert DB data to display format
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   const lives = liveData.map(event => {
     const isUpcoming = event.eventDate >= today;
     return {
-      date: event.eventDate.replace(/-/g, '.'),
-      venue: event.venueName + (event.venueCity ? ` (${event.venueCity})` : ''),
+      date: event.eventDate.replace(/-/g, "."),
+      venue: event.venueName + (event.venueCity ? ` (${event.venueCity})` : ""),
       name: event.eventTitle ?? event.venueName,
       status: isUpcoming ? "UPCOMING" : "ENDED",
       color: isUpcoming ? "#ff6d00" : "#555555",
@@ -396,7 +601,9 @@ function LiveModal({ onClose }: { onClose: () => void }) {
         opacity: visible ? 1 : 0,
         transition: "opacity 0.3s",
       }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <button
         onClick={onClose}
@@ -424,7 +631,10 @@ function LiveModal({ onClose }: { onClose: () => void }) {
       </button>
       <div style={{ maxWidth: 680, width: "100%" }}>
         <PixelBorder color="#ff6d00">
-          <div className="p-6">
+          <div
+            className="p-6"
+            style={{ maxHeight: "85dvh", overflowY: "auto" }}
+          >
             <div className="text-center mb-6">
               <div
                 style={{
@@ -438,19 +648,44 @@ function LiveModal({ onClose }: { onClose: () => void }) {
               >
                 ♦ LIVE INFO ♦
               </div>
-              <div style={{ color: "#ffffff88", fontFamily: "'Press Start 2P', monospace", fontSize: "8px" }}>
+              <div
+                style={{
+                  color: "#ffffff88",
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "8px",
+                }}
+              >
                 STAGE SCHEDULE LOADED
               </div>
             </div>
 
-            <div className="space-y-3 mb-6" style={{ maxHeight: "340px", overflowY: "auto" }}>
+            <div
+              className="space-y-3 mb-6"
+              style={{ maxHeight: "50dvh", overflowY: "auto" }}
+            >
               {liveLoading && (
-                <div style={{ color: "#ffffff44", fontFamily: "'Press Start 2P', monospace", fontSize: "8px", textAlign: "center", padding: "20px" }}>
+                <div
+                  style={{
+                    color: "#ffffff44",
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: "8px",
+                    textAlign: "center",
+                    padding: "20px",
+                  }}
+                >
                   LOADING...
                 </div>
               )}
               {!liveLoading && lives.length === 0 && (
-                <div style={{ color: "#ffffff44", fontFamily: "'Press Start 2P', monospace", fontSize: "8px", textAlign: "center", padding: "20px" }}>
+                <div
+                  style={{
+                    color: "#ffffff44",
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontSize: "8px",
+                    textAlign: "center",
+                    padding: "20px",
+                  }}
+                >
                   NO UPCOMING EVENTS
                 </div>
               )}
@@ -484,7 +719,10 @@ function LiveModal({ onClose }: { onClose: () => void }) {
                       />
                     </div>
                   )}
-                  <div className="flex items-center justify-between" style={{ flex: 1, minWidth: 0 }}>
+                  <div
+                    className="flex items-center justify-between"
+                    style={{ flex: 1, minWidth: 0 }}
+                  >
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-1">
                         <span
@@ -500,7 +738,8 @@ function LiveModal({ onClose }: { onClose: () => void }) {
                           style={{
                             fontFamily: "'Press Start 2P', monospace",
                             fontSize: "6px",
-                            color: live.status === "UPCOMING" ? "#00e676" : "#555",
+                            color:
+                              live.status === "UPCOMING" ? "#00e676" : "#555",
                             border: `1px solid ${live.status === "UPCOMING" ? "#00e676" : "#555"}`,
                             padding: "1px 4px",
                           }}
@@ -508,10 +747,23 @@ function LiveModal({ onClose }: { onClose: () => void }) {
                           {live.status}
                         </span>
                       </div>
-                      <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "9px", color: "#ffffff", marginBottom: "4px" }}>
+                      <div
+                        style={{
+                          fontFamily: "'Press Start 2P', monospace",
+                          fontSize: "9px",
+                          color: "#ffffff",
+                          marginBottom: "4px",
+                        }}
+                      >
                         {live.name}
                       </div>
-                      <div style={{ fontFamily: "'Noto Sans JP', sans-serif", fontSize: "12px", color: "#aaaaaa" }}>
+                      <div
+                        style={{
+                          fontFamily: "'Noto Sans JP', sans-serif",
+                          fontSize: "12px",
+                          color: "#aaaaaa",
+                        }}
+                      >
                         {live.venue}
                       </div>
                     </div>
@@ -532,13 +784,19 @@ function LiveModal({ onClose }: { onClose: () => void }) {
                           textDecoration: "none",
                           display: "inline-block",
                         }}
-                        onMouseEnter={(e) => {
-                          (e.currentTarget as HTMLAnchorElement).style.background = live.color;
-                          (e.currentTarget as HTMLAnchorElement).style.color = "#000";
+                        onMouseEnter={e => {
+                          (
+                            e.currentTarget as HTMLAnchorElement
+                          ).style.background = live.color;
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            "#000";
                         }}
-                        onMouseLeave={(e) => {
-                          (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-                          (e.currentTarget as HTMLAnchorElement).style.color = live.color;
+                        onMouseLeave={e => {
+                          (
+                            e.currentTarget as HTMLAnchorElement
+                          ).style.background = "transparent";
+                          (e.currentTarget as HTMLAnchorElement).style.color =
+                            live.color;
                         }}
                       >
                         TICKET
@@ -559,7 +817,9 @@ function LiveModal({ onClose }: { onClose: () => void }) {
 
 function ContactModal({ onClose }: { onClose: () => void }) {
   const [visible, setVisible] = useState(false);
-  useEffect(() => { setTimeout(() => setVisible(true), 50); }, []);
+  useEffect(() => {
+    setTimeout(() => setVisible(true), 50);
+  }, []);
 
   return (
     <div
@@ -569,7 +829,9 @@ function ContactModal({ onClose }: { onClose: () => void }) {
         opacity: visible ? 1 : 0,
         transition: "opacity 0.3s",
       }}
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      onClick={e => {
+        if (e.target === e.currentTarget) onClose();
+      }}
     >
       <button
         onClick={onClose}
@@ -597,7 +859,10 @@ function ContactModal({ onClose }: { onClose: () => void }) {
       </button>
       <div style={{ maxWidth: 560, width: "100%" }}>
         <PixelBorder color="#00e676">
-          <div className="p-6">
+          <div
+            className="p-6"
+            style={{ maxHeight: "85dvh", overflowY: "auto" }}
+          >
             <div className="text-center mb-6">
               <div
                 style={{
@@ -611,28 +876,66 @@ function ContactModal({ onClose }: { onClose: () => void }) {
               >
                 ✉ CONTACT ✉
               </div>
-              <div style={{ color: "#ffffff88", fontFamily: "'Press Start 2P', monospace", fontSize: "8px" }}>
+              <div
+                style={{
+                  color: "#ffffff88",
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontSize: "8px",
+                }}
+              >
                 BOSS DEFEATED! COMMUNICATION OPEN
               </div>
             </div>
 
             <div className="space-y-4 mb-6">
               {[
-                { label: "BOOKING", value: "booking@senseofdefeat.jp", icon: "♦" },
+                {
+                  label: "BOOKING",
+                  value: "booking@senseofdefeat.jp",
+                  icon: "♦",
+                },
                 { label: "PRESS", value: "press@senseofdefeat.jp", icon: "♦" },
-                { label: "FAN MAIL", value: "fanmail@senseofdefeat.jp", icon: "♦" },
-              ].map((item) => (
+                {
+                  label: "FAN MAIL",
+                  value: "fanmail@senseofdefeat.jp",
+                  icon: "♦",
+                },
+              ].map(item => (
                 <div
                   key={item.label}
                   className="p-3 flex items-center gap-4"
-                  style={{ border: "1px solid #00e67644", background: "#00e6760a" }}
+                  style={{
+                    border: "1px solid #00e67644",
+                    background: "#00e6760a",
+                  }}
                 >
-                  <span style={{ color: "#00e676", fontFamily: "'Press Start 2P', monospace", fontSize: "10px" }}>{item.icon}</span>
+                  <span
+                    style={{
+                      color: "#00e676",
+                      fontFamily: "'Press Start 2P', monospace",
+                      fontSize: "10px",
+                    }}
+                  >
+                    {item.icon}
+                  </span>
                   <div>
-                    <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "7px", color: "#00e676", marginBottom: "4px" }}>
+                    <div
+                      style={{
+                        fontFamily: "'Press Start 2P', monospace",
+                        fontSize: "7px",
+                        color: "#00e676",
+                        marginBottom: "4px",
+                      }}
+                    >
                       {item.label}
                     </div>
-                    <div style={{ fontFamily: "'Noto Sans JP', sans-serif", fontSize: "13px", color: "#e0e0e0" }}>
+                    <div
+                      style={{
+                        fontFamily: "'Noto Sans JP', sans-serif",
+                        fontSize: "13px",
+                        color: "#e0e0e0",
+                      }}
+                    >
                       {item.value}
                     </div>
                   </div>
@@ -651,8 +954,10 @@ function ContactModal({ onClose }: { onClose: () => void }) {
                 lineHeight: "2",
               }}
             >
-              CONGRATULATIONS!<br />
-              YOU COMPLETED THE STAGE!<br />
+              CONGRATULATIONS!
+              <br />
+              YOU COMPLETED THE STAGE!
+              <br />
               <span style={{ color: "#ffdd00" }}>★★★ PERFECT CLEAR ★★★</span>
             </div>
 
@@ -664,7 +969,13 @@ function ContactModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-function CloseButton({ onClose, color }: { onClose: () => void; color: string }) {
+function CloseButton({
+  onClose,
+  color,
+}: {
+  onClose: () => void;
+  color: string;
+}) {
   return (
     <div className="text-center">
       <button
@@ -681,20 +992,28 @@ function CloseButton({ onClose, color }: { onClose: () => void; color: string })
           transition: "all 0.1s",
           letterSpacing: "1px",
         }}
-        onMouseEnter={(e) => {
+        onMouseEnter={e => {
           (e.target as HTMLButtonElement).style.background = "transparent";
           (e.target as HTMLButtonElement).style.color = color;
           (e.target as HTMLButtonElement).style.boxShadow = `0 0 30px ${color}`;
         }}
-        onMouseLeave={(e) => {
+        onMouseLeave={e => {
           (e.target as HTMLButtonElement).style.background = color;
           (e.target as HTMLButtonElement).style.color = "#000";
-          (e.target as HTMLButtonElement).style.boxShadow = `0 0 20px ${color}88`;
+          (e.target as HTMLButtonElement).style.boxShadow =
+            `0 0 20px ${color}88`;
         }}
       >
         ✕ CLOSE
       </button>
-      <div style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "7px", color: "#ffffff33", marginTop: "8px" }}>
+      <div
+        style={{
+          fontFamily: "'Press Start 2P', monospace",
+          fontSize: "7px",
+          color: "#ffffff33",
+          marginTop: "8px",
+        }}
+      >
         ESC / Z key also works
       </div>
     </div>
