@@ -202,7 +202,13 @@ export default function Home() {
   // Detect mobile and orientation
   useEffect(() => {
     const check = () => {
-      setIsMobile(window.innerWidth < 768);
+      // Detect touch devices more reliably than just width, as many modern
+      // phones exceed 768px width in landscape mode.
+      const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isMobileSize = window.innerWidth < 1024; // Cover landscape phones and small tablets
+
+      // If the device has a touch screen and fits a typical mobile/tablet size, or is just very small
+      setIsMobile(window.innerWidth < 768 || (hasTouch && isMobileSize));
       setIsPortrait(window.innerHeight > window.innerWidth);
     };
     check();
