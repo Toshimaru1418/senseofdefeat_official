@@ -89,6 +89,7 @@ export const MOCK_LIVE_EVENTS = [
     eventDate: "2026-03-12",
     venueName: "Shinjuku ANTIKNOCK",
     eventTitle: "SHEER HEART ATTACK vol.19",
+    details: "w/ ovEnola, NABLA9, HAYANIE, EAST UP LINE, NOCTORNIA, 90HYPEs\n\nOPEN 17:30 / START 17:50\nADV ¥2,500 / DOOR ¥3,000 (+1drink ¥600)",
     flyerImageUrl: "/SHA20260312.jpeg",
     isPublished: true,
     sortOrder: 1,
