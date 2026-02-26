@@ -231,6 +231,7 @@ export function MobileControls({
             cursor: "pointer",
             userSelect: "none",
             WebkitUserSelect: "none",
+            pointerEvents: "auto",
           }}
         >
           ◀
@@ -251,6 +252,7 @@ export function MobileControls({
             cursor: "pointer",
             userSelect: "none",
             WebkitUserSelect: "none",
+            pointerEvents: "auto",
           }}
         >
           ▶
@@ -275,6 +277,7 @@ export function MobileControls({
             cursor: "pointer",
             userSelect: "none",
             WebkitUserSelect: "none",
+            pointerEvents: "auto",
           }}
         >
           SHOOT
@@ -295,6 +298,7 @@ export function MobileControls({
             cursor: "pointer",
             userSelect: "none",
             WebkitUserSelect: "none",
+            pointerEvents: "auto",
           }}
         >
           JUMP
